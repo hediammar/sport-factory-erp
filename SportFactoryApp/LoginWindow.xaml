@@ -1,0 +1,117 @@
+﻿<Window x:Class="SportFactoryApp.LoginWindow" 
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        Icon="pack://application:,,,/Images/SFLogo.ico"
+        Title="SPORT FACTORY ERP" 
+        WindowStyle="None"
+        ResizeMode="NoResize" WindowState="Maximized">
+
+    <Window.Resources>
+        <!-- Define the fade-out animation -->
+        <Storyboard x:Key="FadeOutStoryboard">
+            <DoubleAnimation Storyboard.TargetProperty="Opacity" 
+                             From="1.0" To="0.0" Duration="0:0:1"/>
+        </Storyboard>
+    </Window.Resources>
+
+    <Grid Name="LoginGrid">
+        <!-- Background Image -->
+        <Grid.Background>
+            <ImageBrush ImageSource="pack://application:,,,/Images/login_background.jpg" Stretch="UniformToFill"/>
+        </Grid.Background>
+
+        <!-- Custom Title Bar -->
+        <Grid Height="30" VerticalAlignment="Top" Background="Black" MouseDown="TitleBar_MouseDown">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <Image Source="pack://application:,,,/Images/SFLogo.png" Height="25" Width="25" Margin="10"/>
+                <TextBlock Text="SPORT FACTORY ERP" VerticalAlignment="Center" 
+                   Foreground="White" FontSize="16" FontWeight="Bold" Margin="10,0,0,0"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Height="30">
+                <Button x:Name="MinimizeRestoreButton"
+                    Content="_" 
+                
+                Background="Black" 
+                Foreground="#C0C0C0" 
+                BorderBrush="Black" 
+                Width="40" 
+                Click="MinimizeButton_Click" />
+
+                <Button x:Name="MaximizeRestoreButton" 
+                Content="❐" 
+                Background="Black" 
+                Foreground="#C0C0C0" 
+                BorderBrush="Black" 
+                Width="40" 
+                Click="MaximizeRestoreButton_Click"/>
+
+                <Button x:Name="CloseButton"
+                Content="X"
+                Background="Black" 
+                Foreground="#C0C0C0" 
+                BorderBrush="Black" 
+                Width="40"
+                Click="CloseButton_Click"/>
+            </StackPanel>
+        </Grid>
+
+
+
+        <!-- Logo at the top left -->
+        <Image Source="pack://application:,,,/Images/SFLogo.png" Height="150" Margin="50" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+
+        <!-- White card with shadow -->
+        <Border Background="White" CornerRadius="50" Padding="20" Width="300" Height="400" 
+                VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="10" ShadowDepth="5" Opacity="0.5"/>
+            </Border.Effect>
+
+            <!-- StackPanel inside the white card -->
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Height="400" Width="300">
+                <TextBlock Text="Welcome Back" FontSize="30" FontFamily="Calibri" Margin="50" HorizontalAlignment="Center" Foreground="#FF481D4B" FontWeight="Bold"/>
+
+                <Border Background="White" CornerRadius="10" BorderBrush="#CCCCCC" BorderThickness="1" Margin="50,0,50,50">
+                    <xctk:WatermarkTextBox Name="UsernameTextBox" FontSize="20" Watermark="Username" 
+                                           Height="50" Padding="5"/>
+                </Border>
+
+                <Border Background="White" CornerRadius="10" BorderBrush="#CCCCCC" BorderThickness="1" Margin="50,0,50,0">
+                    <xctk:WatermarkPasswordBox Name="PasswordBox" FontSize="20" Watermark="Password" 
+                                               Height="50" Padding="5"/>
+                </Border>
+
+                <Button Name="LoginButton" Content="Login" Click="LoginButton_Click" Height="50" 
+                        Background="#FF471C4D" Foreground="White" Margin="30" Padding="5" FontFamily="Calibri" FontSize="30" FontWeight="Bold">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="BorderBrush" Value="Transparent"/>
+                            <Setter Property="BorderThickness" Value="0"/>
+                            <Setter Property="Cursor" Value="Hand"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Background="{TemplateBinding Background}" 
+                                                CornerRadius="10">
+                                            <!-- Rounded Button -->
+                                            <ContentPresenter HorizontalAlignment="Center" 
+                                                              VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#005F99"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>
+
