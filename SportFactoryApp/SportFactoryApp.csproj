@@ -8,8 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\awm.png" />
     <None Remove="Images\ballLoading.gif" />
     <None Remove="Images\CurlsLoading.gif" />
+    <None Remove="Images\dualBall2.gif" />
+    <None Remove="Images\DualBalls.gif" />
     <None Remove="Images\GSLogo.png" />
     <None Remove="Images\Home.png" />
     <None Remove="Images\Hourglass.gif" />
@@ -46,10 +49,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Images\awm.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\ballLoading.gif">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\CurlsLoading.gif">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\DualBalls.gif">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\GSLogo.png">

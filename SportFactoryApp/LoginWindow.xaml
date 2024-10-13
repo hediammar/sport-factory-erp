@@ -32,12 +32,11 @@
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Height="30">
                 <Button x:Name="MinimizeRestoreButton"
                     Content="_" 
-                
-                Background="Black" 
-                Foreground="#C0C0C0" 
-                BorderBrush="Black" 
-                Width="40" 
-                Click="MinimizeButton_Click" />
+                    Background="Black" 
+                    Foreground="#C0C0C0" 
+                    BorderBrush="Black" 
+                    Width="40" 
+                    Click="MinimizeButton_Click" />
 
                 <Button x:Name="MaximizeRestoreButton" 
                 Content="❐" 
@@ -56,8 +55,6 @@
                 Click="CloseButton_Click"/>
             </StackPanel>
         </Grid>
-
-
 
         <!-- Logo at the top left -->
         <Image Source="pack://application:,,,/Images/SFLogo.png" Height="150" Margin="50" VerticalAlignment="Top" HorizontalAlignment="Left"/>
@@ -112,6 +109,11 @@
                 </Button>
             </StackPanel>
         </Border>
+
+        <!-- Powered By Section -->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,20">
+            <TextBlock Text="Powered By" FontFamily="Roboto" FontWeight="Bold" VerticalAlignment="Center" FontSize="20" Foreground="White" Margin="0,0,0,0"/>
+            <Image Source="pack://application:,,,/Images/awm.png" Height="50" VerticalAlignment="Center"/>
+        </StackPanel>
     </Grid>
 </Window>
-

@@ -5,15 +5,5 @@
 
              StartupUri="LoadingWindow.xaml">
     <Application.Resources>
-        <Style TargetType="Window">
-            <!-- Set the window title bar and resizing behavior -->
-            <Setter Property="WindowStyle" Value="SingleBorderWindow"/>
-            <Setter Property="ResizeMode" Value="CanResize"/>
-            <Setter Property="WindowStartupLocation" Value="CenterScreen"/>
-            <Setter Property="Title" Value="SPORT FACTORY ERP"/>
-            <Setter Property="Icon" Value="pack://application:,,,/Images/SFLogo.ico"/>
-            <Setter Property="WindowState" Value="Maximized"/>
-            <!-- Makes all windows start in fullscreen -->
-        </Style>
     </Application.Resources>
 </Application>

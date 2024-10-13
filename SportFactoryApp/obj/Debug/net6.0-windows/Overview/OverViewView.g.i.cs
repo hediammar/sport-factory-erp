@@ -126,7 +126,7 @@ namespace SportFactoryApp {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/SportFactoryApp;component/overview/overviewview.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/SportFactoryApp;V1.0.0.0;component/overview/overviewview.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Overview\OverViewView.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

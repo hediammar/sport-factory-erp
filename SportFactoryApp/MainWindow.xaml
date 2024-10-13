@@ -6,8 +6,10 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:SportFactoryApp"
         mc:Ignorable="d"
-        Title="SportFactory ERP" Height="450" Width="800"
-        Background="#F7F7F7">
+        Icon="pack://application:,,,/Images/SFLogo.ico"
+Title="SPORT FACTORY ERP" 
+WindowStyle="None"
+ResizeMode="NoResize" WindowState="Maximized">
 
     <Window.Resources>
         <Style x:Key="SidebarButtonStyle" TargetType="Button">
@@ -16,7 +18,7 @@
             <Setter Property="Foreground" Value="#34495E"/>
             <Setter Property="Background" Value="#FFFFFF"/>
             <Setter Property="Padding" Value="10,5"/>
-            <Setter Property="Margin" Value="10,5"/>
+            <Setter Property="Margin" Value="10"/>
             <Setter Property="Height" Value="40"/>
             <Setter Property="BorderBrush" Value="#CCCCCC"/>
             <Setter Property="BorderThickness" Value="1"/>
@@ -32,8 +34,6 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-
-            <!-- Hover effect -->
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Background" Value="#34495E"/>
@@ -44,46 +44,74 @@
     </Window.Resources>
 
     <Grid>
-        <!-- Define Row Definitions -->
+
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <!-- Top panel -->
+            <RowDefinition Height="auto"/>
+            <!-- Custom Title Bar -->
             <RowDefinition Height="*"/>
-            <!-- Main content area -->
+            <!-- Top Bar -->
+            
         </Grid.RowDefinitions>
+
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
             <!-- Sidebar -->
             <ColumnDefinition Width="*"/>
-            <!-- Content Area -->
+            <!-- Main Content Area -->
         </Grid.ColumnDefinitions>
+        <!-- Custom Title Bar -->
+        <Grid Height="30" VerticalAlignment="Top" Background="Black" MouseDown="TitleBar_MouseDown" Grid.Row="0" Grid.ColumnSpan="2">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
+                <Image Source="pack://application:,,,/Images/SFLogo.png" Height="25" Width="25" Margin="10"/>
+                <TextBlock Text="SPORT FACTORY ERP" VerticalAlignment="Center" 
+                   Foreground="White" FontSize="16" FontWeight="Bold" Margin="10,0,0,0"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Height="30">
+                <Button x:Name="MinimizeRestoreButton"
+                Content="_" 
+                Background="Black" 
+                Foreground="#C0C0C0" 
+                BorderBrush="Black" 
+                Width="40" 
+                Click="MinimizeButton_Click" />
+
+                <Button x:Name="MaximizeRestoreButton" 
+                Content="❐" 
+                Background="Black" 
+                Foreground="#C0C0C0" 
+                BorderBrush="Black" 
+                Width="40" 
+                Click="MaximizeRestoreButton_Click"/>
+
+                <Button x:Name="CloseButton"
+                Content="X"
+                Background="Black" 
+                Foreground="#C0C0C0" 
+                BorderBrush="Black" 
+                Width="40"
+                Click="CloseButton_Click"/>
+            </StackPanel>
+        </Grid>
+
 
         <!-- Top Bar (Search, Notification, Profile) -->
-        <Grid Grid.Row="0" Grid.Column="1" Background="#EDEDED" Height="50" VerticalAlignment="Top">
+        <Grid Grid.Row="0" Grid.Column="1" Background="#EDEDED" Height="50" VerticalAlignment="Top" Margin="0,30,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
-                <!-- Search Bar -->
                 <ColumnDefinition Width="Auto"/>
-                <!-- Notification Button -->
                 <ColumnDefinition Width="Auto"/>
-                <!-- Profile Section -->
             </Grid.ColumnDefinitions>
 
             <!-- Search Bar with Watermark -->
-            <Border CornerRadius="15" Background="White" Grid.Column="0" Margin="10,5,50,5" Padding="10">
+            <Border CornerRadius="15" Background="White" Grid.Column="0" Margin="10,0,50,5" Padding="10">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
-                        <!-- Icon -->
                         <ColumnDefinition Width="*"/>
-                        <!-- Textbox -->
                     </Grid.ColumnDefinitions>
-
-                    <!-- Search Icon -->
                     <Image Source="pack://application:,,,/Images/icons8-chercher-30.png" Width="20" Height="20" VerticalAlignment="Center" Grid.Column="0" Margin="5,0"/>
-
-                    <!-- Search Textbox with Watermark -->
                     <xctk:WatermarkTextBox Grid.Column="1" Height="30" VerticalAlignment="Center" Watermark="Tap to search..." BorderThickness="0" Padding="5,5"/>
                 </Grid>
             </Border>
@@ -93,51 +121,45 @@
                 <Image Source="pack://application:,,,/Images/icons8-notifications-30.png" Width="25"/>
             </Button>
 
-            <!-- Profile Section (Right-aligned) -->
+            <!-- Profile Section -->
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Grid.Column="2" Margin="10,0,10,0">
-                <!-- Round Profile Picture -->
                 <Ellipse Width="40" Height="40" HorizontalAlignment="Right"  Margin="0,0,10,0">
                     <Ellipse.Fill>
                         <ImageBrush ImageSource="pack://application:,,,/Images/icons8-account-30.png"/>
                     </Ellipse.Fill>
                 </Ellipse>
-
-                <!-- Employee Name -->
                 <TextBlock x:Name="LoggedInUserTextBlock" VerticalAlignment="Center" FontSize="16" FontWeight="Bold" Foreground="#34495E" Margin="0,0,10,0"/>
-
-
             </StackPanel>
         </Grid>
 
+
         <!-- Sidebar -->
-        <StackPanel x:Name="Sidebar" Background="#EDEDED" HorizontalAlignment="Center" Width="200" Grid.RowSpan="2">
-
-            <!-- Toggle Button for Minimizing/Expanding Sidebar -->
-            
-
-            <!-- Company Logo -->
+        <StackPanel x:Name="Sidebar" Background="#EDEDED" HorizontalAlignment="Center" Width="200" VerticalAlignment="Stretch" Grid.RowSpan="2" Margin="0,30,0,0">
             <Image x:Name="LogoImage" Source="pack://application:,,,/Images/SFLogo.png" Height="70" Margin="10" VerticalAlignment="Top" HorizontalAlignment="Center" />
-
-            <!-- Sidebar Buttons -->
-            <Button Style="{StaticResource SidebarButtonStyle}" Click="MembersButton_Click" Visibility="{Binding SidebarTextVisibility}">
+            <Button Style="{StaticResource SidebarButtonStyle}" Click="MembersButton_Click">
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                     <Image Source="pack://application:,,,/Images/icons8-accueil-30.png" Height="20" Margin="0,0,5,0"/>
                     <TextBlock Text="Overview" VerticalAlignment="Center"/>
                 </StackPanel>
             </Button>
-
-            <Button Style="{StaticResource SidebarButtonStyle}" Click="SessionsButton_Click" Cursor="Hand" Visibility="{Binding SidebarTextVisibility}">
+            <Button Style="{StaticResource SidebarButtonStyle}" Click="SessionsButton_Click" Cursor="Hand">
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                    <Image Source="pack://application:,,,/Images/icons8-human-resources-30.png" Height="20" Margin="0,0,5,0"/>
-                    <TextBlock Text="Clients" VerticalAlignment="Center"/>
+                    <Image Source="pack://application:,,,/Images/icons8-membre-30.png" Height="20" Margin="0,0,5,0"/>
+                    <TextBlock Text="Client" VerticalAlignment="Center"/>
                 </StackPanel>
             </Button>
-
             
-
         </StackPanel>
 
         <!-- Main Content Area -->
-        <ContentControl x:Name="MainContent" Grid.Row="1" Grid.Column="1" Margin="10"/>
+        <Grid x:Name="MainContent" Grid.Row="1" Grid.Column="1" Margin="0,0,0,0">
+            <ContentControl x:Name="MainContentControl"/>
+            <!-- Powered By Section -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,5">
+                <TextBlock Text="Powered By"  FontFamily="Roboto"  FontWeight="Bold" VerticalAlignment="Center" FontSize="15" Foreground="Black" Margin="0,0,0,0"/>
+                <Image Source="pack://application:,,,/Images/awm.png" Height="30" VerticalAlignment="Center"/>
+            </StackPanel>
+        </Grid>
+        
     </Grid>
 </Window>

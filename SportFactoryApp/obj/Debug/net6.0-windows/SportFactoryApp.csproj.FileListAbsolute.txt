@@ -109,4 +109,3 @@ C:\Users\21650\Desktop\SportFactoryApp\SportFactoryApp\obj\Debug\net6.0-windows\
 C:\Users\21650\Desktop\SportFactoryApp\SportFactoryApp\obj\Debug\net6.0-windows\LoadingWindow.baml
 C:\Users\21650\Desktop\SportFactoryApp\SportFactoryApp\obj\Debug\net6.0-windows\LoadingWindow.g.cs
 C:\Users\21650\Desktop\SportFactoryApp\SportFactoryApp\bin\Debug\net6.0-windows\WpfAnimatedGif.dll
-C:\Users\21650\Desktop\SportFactoryApp\SportFactoryApp\obj\Debug\net6.0-windows\App.baml
