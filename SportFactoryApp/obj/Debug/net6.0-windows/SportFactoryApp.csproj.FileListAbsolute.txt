@@ -1,7 +1,8 @@
 C:\Users\21650\Desktop\SportFactoryApp\SportFactoryApp\obj\Debug\net6.0-windows\SportFactoryApp.csproj.AssemblyReference.cache
+C:\Users\21650\Desktop\SportFactoryApp\SportFactoryApp\obj\Debug\net6.0-windows\LoadingWindow.baml
 C:\Users\21650\Desktop\SportFactoryApp\SportFactoryApp\obj\Debug\net6.0-windows\LoginWindow.baml
-C:\Users\21650\Desktop\SportFactoryApp\SportFactoryApp\obj\Debug\net6.0-windows\Members\MembersView.baml
 C:\Users\21650\Desktop\SportFactoryApp\SportFactoryApp\obj\Debug\net6.0-windows\Overview\OverViewView.baml
+C:\Users\21650\Desktop\SportFactoryApp\SportFactoryApp\obj\Debug\net6.0-windows\LoadingWindow.g.cs
 C:\Users\21650\Desktop\SportFactoryApp\SportFactoryApp\obj\Debug\net6.0-windows\LoginWindow.g.cs
 C:\Users\21650\Desktop\SportFactoryApp\SportFactoryApp\obj\Debug\net6.0-windows\MainWindow.g.cs
 C:\Users\21650\Desktop\SportFactoryApp\SportFactoryApp\obj\Debug\net6.0-windows\Members\MembersView.g.cs
@@ -9,6 +10,15 @@ C:\Users\21650\Desktop\SportFactoryApp\SportFactoryApp\obj\Debug\net6.0-windows\
 C:\Users\21650\Desktop\SportFactoryApp\SportFactoryApp\obj\Debug\net6.0-windows\App.g.cs
 C:\Users\21650\Desktop\SportFactoryApp\SportFactoryApp\obj\Debug\net6.0-windows\SportFactoryApp_MarkupCompile.cache
 C:\Users\21650\Desktop\SportFactoryApp\SportFactoryApp\obj\Debug\net6.0-windows\SportFactoryApp_MarkupCompile.lref
+C:\Users\21650\Desktop\SportFactoryApp\SportFactoryApp\obj\Debug\net6.0-windows\Memberships\AddMembershipWindow.baml
+C:\Users\21650\Desktop\SportFactoryApp\SportFactoryApp\obj\Debug\net6.0-windows\Memberships\UpdateMembershipWindow.baml
+C:\Users\21650\Desktop\SportFactoryApp\SportFactoryApp\obj\Debug\net6.0-windows\Members\AddMemberWindow.baml
+C:\Users\21650\Desktop\SportFactoryApp\SportFactoryApp\obj\Debug\net6.0-windows\Members\UpdateMemberWindow.baml
+C:\Users\21650\Desktop\SportFactoryApp\SportFactoryApp\obj\Debug\net6.0-windows\Memberships\AddMembershipWindow.g.cs
+C:\Users\21650\Desktop\SportFactoryApp\SportFactoryApp\obj\Debug\net6.0-windows\Memberships\UpdateMembershipWindow.g.cs
+C:\Users\21650\Desktop\SportFactoryApp\SportFactoryApp\obj\Debug\net6.0-windows\Members\AddMemberWindow.g.cs
+C:\Users\21650\Desktop\SportFactoryApp\SportFactoryApp\obj\Debug\net6.0-windows\Members\UpdateMemberWindow.g.cs
+C:\Users\21650\Desktop\SportFactoryApp\SportFactoryApp\obj\Debug\net6.0-windows\Members\MembersView.baml
 C:\Users\21650\Desktop\SportFactoryApp\SportFactoryApp\bin\Debug\net6.0-windows\SportFactoryApp.exe
 C:\Users\21650\Desktop\SportFactoryApp\SportFactoryApp\bin\Debug\net6.0-windows\SportFactoryApp.deps.json
 C:\Users\21650\Desktop\SportFactoryApp\SportFactoryApp\bin\Debug\net6.0-windows\SportFactoryApp.runtimeconfig.json
@@ -68,6 +78,7 @@ C:\Users\21650\Desktop\SportFactoryApp\SportFactoryApp\bin\Debug\net6.0-windows\
 C:\Users\21650\Desktop\SportFactoryApp\SportFactoryApp\bin\Debug\net6.0-windows\System.Runtime.Caching.dll
 C:\Users\21650\Desktop\SportFactoryApp\SportFactoryApp\bin\Debug\net6.0-windows\System.Text.Encodings.Web.dll
 C:\Users\21650\Desktop\SportFactoryApp\SportFactoryApp\bin\Debug\net6.0-windows\System.Text.Json.dll
+C:\Users\21650\Desktop\SportFactoryApp\SportFactoryApp\bin\Debug\net6.0-windows\WpfAnimatedGif.dll
 C:\Users\21650\Desktop\SportFactoryApp\SportFactoryApp\bin\Debug\net6.0-windows\cs-CZ\Xceed.Wpf.AvalonDock.resources.dll
 C:\Users\21650\Desktop\SportFactoryApp\SportFactoryApp\bin\Debug\net6.0-windows\de\Xceed.Wpf.AvalonDock.resources.dll
 C:\Users\21650\Desktop\SportFactoryApp\SportFactoryApp\bin\Debug\net6.0-windows\es\Xceed.Wpf.AvalonDock.resources.dll
@@ -106,6 +117,3 @@ C:\Users\21650\Desktop\SportFactoryApp\SportFactoryApp\obj\Debug\net6.0-windows\
 C:\Users\21650\Desktop\SportFactoryApp\SportFactoryApp\obj\Debug\net6.0-windows\SportFactoryApp.pdb
 C:\Users\21650\Desktop\SportFactoryApp\SportFactoryApp\obj\Debug\net6.0-windows\SportFactoryApp.genruntimeconfig.cache
 C:\Users\21650\Desktop\SportFactoryApp\SportFactoryApp\obj\Debug\net6.0-windows\ref\SportFactoryApp.dll
-C:\Users\21650\Desktop\SportFactoryApp\SportFactoryApp\obj\Debug\net6.0-windows\LoadingWindow.baml
-C:\Users\21650\Desktop\SportFactoryApp\SportFactoryApp\obj\Debug\net6.0-windows\LoadingWindow.g.cs
-C:\Users\21650\Desktop\SportFactoryApp\SportFactoryApp\bin\Debug\net6.0-windows\WpfAnimatedGif.dll

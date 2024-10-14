@@ -1,5 +1,5 @@
 ﻿using System;
-
+using SportFactoryApp;
     public class Session
     {
         public int SessionId { get; set; }

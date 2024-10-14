@@ -2,6 +2,7 @@
 using System;
 using System.Windows;
 using System.Windows.Input;
+using SportFactoryApp.Members;
 
 namespace SportFactoryApp
 {
@@ -79,7 +80,8 @@ namespace SportFactoryApp
 
         private void SessionsButton_Click(object sender, RoutedEventArgs e)
         {
-            ShowSessionsView();
+            var MembersView = new MembersView(); // Assuming ChargesView is a UserControl
+            MainContentControl.Content = MembersView;
         }
 
         private void ShowMembersView()

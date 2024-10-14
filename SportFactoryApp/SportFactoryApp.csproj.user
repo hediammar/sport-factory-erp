@@ -7,7 +7,16 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Memberships\AddMembershipWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Members\AddMemberWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Members\MembersView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Members\UpdateMemberWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -16,6 +25,18 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Memberships\UpdateMembershipWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Memberships\AddMembershipWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Members\AddMemberWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Members\UpdateMemberWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Overview\OverViewView.xaml">

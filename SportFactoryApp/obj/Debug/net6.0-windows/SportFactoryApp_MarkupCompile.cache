@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
 C:\Users\21650\Desktop\SportFactoryApp\SportFactoryApp\App.xaml
-5-1173493817
+9703163669
 
-191636437464
+25360220458
 248-1651016107
-LoadingWindow.xaml;LoginWindow.xaml;MainWindow.xaml;Members\MembersView.xaml;Overview\OverViewView.xaml;
+LoadingWindow.xaml;LoginWindow.xaml;MainWindow.xaml;Memberships\AddMembershipWindow.xaml;Memberships\UpdateMembershipWindow.xaml;Members\AddMemberWindow.xaml;Members\MembersView.xaml;Members\UpdateMemberWindow.xaml;Overview\OverViewView.xaml;
 
 False
 

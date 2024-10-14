@@ -1,34 +1,39 @@
-﻿<UserControl x:Class="SportFactory.MembersView"
+﻿<UserControl x:Class="SportFactoryApp.Members.MembersView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d"
-             d:DesignHeight="300" d:DesignWidth="400">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+             xmlns:local="clr-namespace:SportFactoryApp.Members"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit">
+    <StackPanel>
+        <!-- Members Section -->
+        <TextBlock Text="Members" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
 
-        <!-- Add/Edit Member Form -->
-        <StackPanel Grid.Row="0" Margin="10">
-            <xctk:WatermarkTextBox x:Name="FirstNameTextBox" Watermark="Prenom" Margin="0,0,0,5"/>
-            <xctk:WatermarkTextBox x:Name="LastNameTextBox" Watermark="Last Name" Margin="0,0,0,5"/>
-            <DatePicker x:Name="StartDatePicker" Margin="0,0,0,5"/>
-           
+        <ListBox x:Name="MembersListBox" DisplayMemberPath="FirstName" SelectionChanged="MembersListBox_SelectionChanged"/>
+
+        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+            <Button Content="Add Member" Click="AddMember_Click" Margin="5"/>
+            <Button Content="Update Member" Click="UpdateMember_Click" Margin="5"/>
+            <Button Content="Delete Member" Click="DeleteMember_Click" Margin="5"/>
         </StackPanel>
 
-        <!-- Member List View -->
-        <ListView Grid.Row="1" x:Name="MembersListView" Margin="10">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="Prenom" DisplayMemberBinding="{Binding FirstName}" Width="120"/>
-                    <GridViewColumn Header="Nom" DisplayMemberBinding="{Binding LastName}" Width="120"/>
-                    <GridViewColumn Header="Start Date" DisplayMemberBinding="{Binding StartDate}" Width="120"/>
-                </GridView>
-            </ListView.View>
-        </ListView>
-    </Grid>
+        <!-- Memberships Section -->
+        <TextBlock Text="Latest Memberships" FontSize="16" FontWeight="Bold" Margin="0,20,0,10"/>
+
+        <DataGrid x:Name="MembershipsDataGrid" AutoGenerateColumns="False" SelectionChanged="MembershipsDataGrid_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Type" Binding="{Binding Type}" />
+                <DataGridTextColumn Header="Price" Binding="{Binding Price, StringFormat={}{0:C}}" />
+                <DataGridTextColumn Header="Member" Binding="{Binding Member.FirstName}" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+
+
+        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+            <Button Content="Add Membership" Click="AddMembership_Click" Margin="5"/>
+            <Button Content="Update Membership" Click="UpdateMembership_Click" Margin="5"/>
+            <Button Content="Delete Membership" Click="DeleteMembership_Click" Margin="5"/>
+        </StackPanel>
+
+        <!-- Form will be displayed dynamically on button clicks -->
+    </StackPanel>
 </UserControl>

@@ -6,6 +6,7 @@ public class GymContext : DbContext
     public DbSet<Member> Members { get; set; }
     public DbSet<Session> Sessions { get; set; }
     public DbSet<User> Users { get; set; }
+    public DbSet<Membership> Membershipss { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -20,5 +21,6 @@ public class GymContext : DbContext
         modelBuilder.Entity<Member>().ToTable("Members");
         modelBuilder.Entity<Session>().ToTable("Sessions");
         modelBuilder.Entity<User>().ToTable("Users");
+        modelBuilder.Entity<Membership>().ToTable("Membership");
     }
 }
