@@ -7,9 +7,10 @@
         xmlns:local="clr-namespace:SportFactoryApp"
         mc:Ignorable="d"
         Icon="pack://application:,,,/Images/SFLogo.ico"
-Title="SPORT FACTORY ERP" 
-WindowStyle="None"
-ResizeMode="NoResize" WindowState="Maximized">
+        Title="SPORT FACTORY ERP" 
+        WindowStyle="None"
+        ResizeMode="NoResize" 
+        WindowState="Maximized">
 
     <Window.Resources>
         <Style x:Key="SidebarButtonStyle" TargetType="Button">
@@ -44,15 +45,12 @@ ResizeMode="NoResize" WindowState="Maximized">
     </Window.Resources>
 
     <Grid>
-
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <!-- Custom Title Bar -->
             <RowDefinition Height="*"/>
             <!-- Top Bar -->
-            
         </Grid.RowDefinitions>
-
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
@@ -60,6 +58,7 @@ ResizeMode="NoResize" WindowState="Maximized">
             <ColumnDefinition Width="*"/>
             <!-- Main Content Area -->
         </Grid.ColumnDefinitions>
+
         <!-- Custom Title Bar -->
         <Grid Height="30" VerticalAlignment="Top" Background="Black" MouseDown="TitleBar_MouseDown" Grid.Row="0" Grid.ColumnSpan="2">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
@@ -95,7 +94,6 @@ ResizeMode="NoResize" WindowState="Maximized">
             </StackPanel>
         </Grid>
 
-
         <!-- Top Bar (Search, Notification, Profile) -->
         <Grid Grid.Row="0" Grid.Column="1" Background="#EDEDED" Height="50" VerticalAlignment="Top" Margin="0,30,0,0">
             <Grid.ColumnDefinitions>
@@ -104,15 +102,37 @@ ResizeMode="NoResize" WindowState="Maximized">
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <!-- Search Bar with Watermark -->
+            <!-- Search Bar with AutoComplete -->
             <Border CornerRadius="15" Background="White" Grid.Column="0" Margin="10,0,50,5" Padding="10">
                 <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
+
+                    <!-- Search Icon -->
                     <Image Source="pack://application:,,,/Images/icons8-chercher-30.png" Width="20" Height="20" VerticalAlignment="Center" Grid.Column="0" Margin="5,0"/>
-                    <xctk:WatermarkTextBox Grid.Column="1" Height="30" VerticalAlignment="Center" Watermark="Tap to search..." BorderThickness="0" Padding="5,5"/>
+
+                    <!-- Search TextBox -->
+                    <xctk:WatermarkTextBox x:Name="SearchTextBox" Grid.Column="1" Height="30" VerticalAlignment="Center" 
+                                       Watermark="Tap to search..." BorderThickness="0" Padding="5,5" 
+                                       TextChanged="SearchTextBox_TextChanged" />
+
+                    <!-- Autocomplete Popup -->
+                    <Popup x:Name="SearchResultPopup" PlacementTarget="{Binding ElementName=SearchTextBox}" 
+                           StaysOpen="False" AllowsTransparency="True" Width="100">
+                        <Border Background="Black" BorderThickness="1" BorderBrush="#CCCCCC" CornerRadius="5">
+                            <ListBox x:Name="SearchResultListBox" 
+                                     Background="White" 
+                                     Visibility="Visible" 
+                                     SelectionChanged="SearchResultListBox_SelectionChanged"
+                                     />
+                        </Border>
+                    </Popup>
                 </Grid>
             </Border>
 
@@ -132,7 +152,6 @@ ResizeMode="NoResize" WindowState="Maximized">
             </StackPanel>
         </Grid>
 
-
         <!-- Sidebar -->
         <StackPanel x:Name="Sidebar" Background="#EDEDED" HorizontalAlignment="Center" Width="200" VerticalAlignment="Stretch" Grid.RowSpan="2" Margin="0,30,0,0">
             <Image x:Name="LogoImage" Source="pack://application:,,,/Images/SFLogo.png" Height="70" Margin="10" VerticalAlignment="Top" HorizontalAlignment="Center" />
@@ -148,7 +167,6 @@ ResizeMode="NoResize" WindowState="Maximized">
                     <TextBlock Text="Client" VerticalAlignment="Center"/>
                 </StackPanel>
             </Button>
-            
         </StackPanel>
 
         <!-- Main Content Area -->
@@ -157,9 +175,8 @@ ResizeMode="NoResize" WindowState="Maximized">
             <!-- Powered By Section -->
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,5">
                 <TextBlock Text="Powered By"  FontFamily="Roboto"  FontWeight="Bold" VerticalAlignment="Center" FontSize="15" Foreground="Black" Margin="0,0,0,0"/>
-                <Image Source="pack://application:,,,/Images/awm.png" Height="30" VerticalAlignment="Center"/>
+                <Image Source="pack://application:,,,/Images/awm.png" Height="50" Width="50" Margin="5,0"/>
             </StackPanel>
         </Grid>
-        
     </Grid>
 </Window>

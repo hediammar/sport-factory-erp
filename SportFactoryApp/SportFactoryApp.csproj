@@ -8,10 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="ViewModels\MembersViewModel.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Remove="Images\awm.png" />
     <None Remove="Images\ballLoading.gif" />
     <None Remove="Images\CurlsLoading.gif" />
@@ -35,10 +31,6 @@
     <None Remove="Images\login_background3.jpg" />
     <None Remove="Images\SFLogo.ico" />
     <None Remove="Images\SFLogo.png" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="ViewModels\MembersViewModel.cs" />
   </ItemGroup>
 
   <ItemGroup>

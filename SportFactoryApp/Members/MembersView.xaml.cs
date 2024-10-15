@@ -31,7 +31,7 @@ namespace SportFactoryApp.Members
         private void LoadMembers()
         {
             var members = _context.Members.ToList();
-            MembersListBox.ItemsSource = members;
+            MembersDataGrid.ItemsSource = members;
         }
 
         // Load Memberships from the database and display them in the ListBox
@@ -57,7 +57,7 @@ namespace SportFactoryApp.Members
         // Update Member Event Handler
         private void UpdateMember_Click(object sender, RoutedEventArgs e)
         {
-            if (MembersListBox.SelectedItem is Member selectedMember)
+            if (MembersDataGrid.SelectedItem is Member selectedMember)
             {
                 var updateMemberWindow = new UpdateMemberWindow(selectedMember);
                 if (updateMemberWindow.ShowDialog() == true) // If user confirms update
@@ -75,7 +75,7 @@ namespace SportFactoryApp.Members
         // Delete Member Event Handler
         private void DeleteMember_Click(object sender, RoutedEventArgs e)
         {
-            if (MembersListBox.SelectedItem is Member selectedMember)
+            if (MembersDataGrid.SelectedItem is Member selectedMember)
             {
                 _context.Members.Remove(selectedMember);
                 _context.SaveChanges();
@@ -136,7 +136,7 @@ namespace SportFactoryApp.Members
         {
             // You can implement any logic you want to execute when a member is selected
             // For example, you might want to display details of the selected member:
-            if (MembersListBox.SelectedItem is Member selectedMember)
+            if (MembersDataGrid.SelectedItem is Member selectedMember)
             {
                 // Display details or perform any actions with the selected member
                 // For example, you might load the memberships associated with the selected member
@@ -147,7 +147,7 @@ namespace SportFactoryApp.Members
         {
             // You can implement any logic you want to execute when a member is selected
             // For example, you might want to display details of the selected member:
-            if (MembersListBox.SelectedItem is Member selectedMember)
+            if (MembersDataGrid.SelectedItem is Member selectedMember)
             {
                 // Display details or perform any actions with the selected member
                 // For example, you might load the memberships associated with the selected member

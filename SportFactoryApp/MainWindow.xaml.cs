@@ -3,16 +3,30 @@ using System;
 using System.Windows;
 using System.Windows.Input;
 using SportFactoryApp.Members;
+using SportFactoryApp.Profile;
+using System.Collections.Generic;
+using System.Windows.Controls;
 
 namespace SportFactoryApp
 {
     public partial class MainWindow : Window
     {
+        private List<string> _allItems;
         public MainWindow()
         {
             InitializeComponent();
             LoadUserProfile(); // Load user profile on startup
             ShowMembersView(); // Default view
+            _allItems = new List<string>
+            {
+                "John Doe",
+                "Jane Smith",
+                "Mike Johnson",
+                "Sport Factory",
+                "Mary Lee",
+                "James Anderson",
+                "Sport Factory Gym"
+            };
         }
 
         private void TitleBar_MouseDown(object sender, MouseButtonEventArgs e)
@@ -93,5 +107,104 @@ namespace SportFactoryApp
         {
             // MainContent.Content = new SessionsView(); // Replace with your Sessions view user control
         }
+        private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var searchText = SearchTextBox.Text;
+
+            if (string.IsNullOrWhiteSpace(searchText))
+            {
+                SearchResultListBox.ItemsSource = null;
+                SearchResultPopup.IsOpen = false;
+                return;
+            }
+
+            // Fetch member names and IDs from the database based on the search term
+            var filteredResults = GetMemberNames(searchText);
+
+            // Update ListBox with filtered results
+            SearchResultListBox.ItemsSource = filteredResults;
+
+            // Show or hide the Popup based on whether there are results
+            SearchResultPopup.IsOpen = filteredResults.Any();
+        }
+
+        private List<MemberSearchResult> GetMemberNames(string searchTerm)
+        {
+            using (var context = new GymContext())
+            {
+                var members = context.Members.ToList(); // Load all members into memory
+
+                return members
+                    .Where(m => string.IsNullOrWhiteSpace(searchTerm) ||
+                                 m.FirstName.ToLower().Contains(searchTerm.ToLower()) ||
+                                 m.LastName.ToLower().Contains(searchTerm.ToLower()))
+                    .Select(m => new MemberSearchResult
+                    {
+                        Id = m.MemberId, // Assuming Id is the primary key
+                        FullName = $"{m.FirstName} {m.LastName}"
+                    })
+                    .ToList();
+            }
+        }
+
+        private void SearchResultListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (SearchResultListBox.SelectedItem is MemberSearchResult selectedMember)
+            {
+                // Fetch member details based on the selected member ID
+                var member = GetMemberById(selectedMember.Id); // Fetch using the member ID
+
+                if (member != null)
+                {
+                    // Create the MemberProfileView UserControl
+                    var memberProfileView = new MemberProfileView(member); // Pass the member to the UserControl
+
+                    // Set the UserControl to MainContentControl
+                    MainContentControl.Content = memberProfileView;
+
+                    // Close the search results
+                    SearchResultPopup.IsOpen = false;
+                }
+            }
+        }
+
+        private Member GetMemberById(int memberId)
+        {
+            try
+            {
+                using (var context = new GymContext())
+                {
+                    return context.Members.FirstOrDefault(m => m.MemberId == memberId);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred while retrieving member details: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return null;
+            }
+        }
+
+        // Helper class to hold member search results
+        public class MemberSearchResult
+        {
+            public int Id { get; set; }
+            public string FullName { get; set; }
+
+            public override string ToString() => FullName; // Override ToString to display FullName in ListBox
+        }
+
+
+
+        private void ShowMemberProfile(Member selectedMember)
+        {
+            // Pass the selected member to the MemberProfileView constructor
+            var memberProfileView = new MemberProfileView(selectedMember);
+            memberProfileView.DataContext = selectedMember;  // Optionally, bind the selected member to the DataContext
+            MainContentControl.Content = memberProfileView;  // Display the profile in the main content area
+        }
+
+
+
+
     }
 }

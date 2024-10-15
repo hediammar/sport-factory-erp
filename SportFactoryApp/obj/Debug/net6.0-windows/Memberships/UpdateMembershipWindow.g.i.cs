@@ -93,7 +93,7 @@ namespace SportFactoryApp.Memberships {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/SportFactoryApp;component/memberships/updatemembershipwindow.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/SportFactoryApp;V1.0.0.0;component/memberships/updatemembershipwindow.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Memberships\UpdateMembershipWindow.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

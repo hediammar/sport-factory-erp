@@ -7,12 +7,17 @@
         <!-- Members Section -->
         <TextBlock Text="Members" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
 
-        <ListBox x:Name="MembersListBox" DisplayMemberPath="FirstName" SelectionChanged="MembersListBox_SelectionChanged"/>
-
+        <DataGrid x:Name="MembersDataGrid" AutoGenerateColumns="False" SelectionChanged="MembershipsDataGrid_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Nom de Membre" Binding="{Binding FirstName}" />
+                <DataGridTextColumn Header="Prenom de Membre" Binding="{Binding LastName}" />
+                <DataGridTextColumn Header="Date d'adherence " Binding="{Binding StartDate}" />
+            </DataGrid.Columns>
+        </DataGrid>
         <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-            <Button Content="Add Member" Click="AddMember_Click" Margin="5"/>
-            <Button Content="Update Member" Click="UpdateMember_Click" Margin="5"/>
-            <Button Content="Delete Member" Click="DeleteMember_Click" Margin="5"/>
+            <Button Content="Ajouter Membre" Click="AddMember_Click" Margin="5"/>
+            <Button Content="Mise à Jour Membre" Click="UpdateMember_Click" Margin="5"/>
+            <Button Content="Effacer Membre" Click="DeleteMember_Click" Margin="5"/>
         </StackPanel>
 
         <!-- Memberships Section -->
@@ -20,18 +25,20 @@
 
         <DataGrid x:Name="MembershipsDataGrid" AutoGenerateColumns="False" SelectionChanged="MembershipsDataGrid_SelectionChanged">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Type" Binding="{Binding Type}" />
-                <DataGridTextColumn Header="Price" Binding="{Binding Price, StringFormat={}{0:C}}" />
-                <DataGridTextColumn Header="Member" Binding="{Binding Member.FirstName}" />
+                <DataGridTextColumn Header="Membre" Binding="{Binding Member.FullName}" />
+                <DataGridTextColumn Header="Type d'abonnement" Binding="{Binding Type}" />
+                <DataGridTextColumn Header="Prix" Binding="{Binding Price}" />
+                <DataGridTextColumn Header="Status" Binding="{Binding Status}" />
+                <DataGridTextColumn Header="Date de debut " Binding="{Binding Date}" />
             </DataGrid.Columns>
         </DataGrid>
 
 
 
         <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-            <Button Content="Add Membership" Click="AddMembership_Click" Margin="5"/>
-            <Button Content="Update Membership" Click="UpdateMembership_Click" Margin="5"/>
-            <Button Content="Delete Membership" Click="DeleteMembership_Click" Margin="5"/>
+            <Button Content="Ajouter Abonnement" Click="AddMembership_Click" Margin="5"/>
+            <Button Content="Mise à Jour Abonnement" Click="UpdateMembership_Click" Margin="5"/>
+            <Button Content="Effacer Abonnement" Click="DeleteMembership_Click" Margin="5"/>
         </StackPanel>
 
         <!-- Form will be displayed dynamically on button clicks -->

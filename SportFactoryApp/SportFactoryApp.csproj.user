@@ -19,6 +19,9 @@
     <Compile Update="Members\UpdateMemberWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Profile\MemberProfileView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="LoadingWindow.xaml">
@@ -43,6 +46,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Members\MembersView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Profile\MemberProfileView.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
