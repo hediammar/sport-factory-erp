@@ -2,15 +2,38 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-             Title="Update Member" Height="300" Width="400">
-    <StackPanel Margin="20">
-        <TextBlock Text="Update Member" FontWeight="Bold" FontSize="16" />
-        <xctk:WatermarkTextBox Name="FirstNameTextBox" Watermark="Enter First Name" />
-        <xctk:WatermarkTextBox Name="LastNameTextBox" Watermark="Enter Last Name" />
+             Title="Update Member" Height="350" Width="400">
+    <StackPanel Margin="20" VerticalAlignment="Center">
+        <TextBlock Text="Prenom du membre" Margin="10" HorizontalAlignment="Center" FontFamily="72" FontWeight="Bold"/>
+        <xctk:WatermarkTextBox Name="FirstNameTextBox" Width="200"  Watermark="Enter First Name" />
+        <TextBlock Text="Nom du membre" Margin="10" HorizontalAlignment="Center" FontFamily="72" FontWeight="Bold"></TextBlock>
+        <xctk:WatermarkTextBox Name="LastNameTextBox" Width="200" Watermark="Enter Last Name" />
 
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Content="Save" Click="SaveButton_Click" Margin="5"/>
-            <Button Content="Cancel" Click="CancelButton_Click" Margin="5"/>
-        </StackPanel>
+        <!-- Gender ComboBox with placeholder -->
+        <TextBlock Text="Gendre du membre" Margin="10" HorizontalAlignment="Center" FontFamily="72" FontWeight="Bold"></TextBlock>
+        <ComboBox Name="GenderComboBox" Width="200" Margin="0,0,0,0" HorizontalAlignment="Center">
+            <ComboBox.Resources>
+                <Style TargetType="ComboBox">
+                    <Style.Triggers>
+                        <Trigger Property="SelectedItem" Value="{x:Null}">
+                            <Setter Property="Foreground" Value="Gray"/>
+                        </Trigger>
+                        <Trigger Property="SelectedItem" Value="{x:Null}">
+                            <Setter Property="Text" Value="Select Gender"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </ComboBox.Resources>
+            <ComboBoxItem Content="Male" />
+            <ComboBoxItem Content="Female" />
+            <ComboBoxItem Content="Other" />
+        </ComboBox>
+
+        <!-- Date of Birth DatePicker -->
+        <TextBlock Text="Date de naissance du membre" Margin="10" HorizontalAlignment="Center" FontFamily="72" FontWeight="Bold"></TextBlock>
+        <DatePicker Name="BirthDatePicker" Width="200" Margin="0,0,0,0" HorizontalAlignment="Center" />
+
+        <Button Name="UpdateMemberButton" Content="Update Member" Click="SaveButton_Click"
+            Width="150" Margin="0,20,0,0" HorizontalAlignment="Center"/>
     </StackPanel>
 </Window>

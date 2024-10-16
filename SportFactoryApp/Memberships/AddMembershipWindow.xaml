@@ -12,8 +12,24 @@
                                  Margin="0,10,0,10" 
                                  Watermark="Select Member"
                                  IsTextSearchEnabled="True" />
-
-        <xctk:WatermarkTextBox x:Name="TypeTextBox" Watermark="Membership Type" Margin="0,10,0,10"/>
+        <ComboBox Name="MembershipType" Width="200" Margin="0,0,0,0" HorizontalAlignment="Center">
+            <ComboBox.Resources>
+                <Style TargetType="ComboBox">
+                    <Style.Triggers>
+                        <Trigger Property="SelectedItem" Value="{x:Null}">
+                            <Setter Property="Foreground" Value="Gray"/>
+                        </Trigger>
+                        <Trigger Property="SelectedItem" Value="{x:Null}">
+                            <Setter Property="Text" Value="Select Gender"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </ComboBox.Resources>
+            <ComboBoxItem Content="Pack 12 Seances" />
+            <ComboBoxItem Content="Seance Unique" />
+            
+        </ComboBox>
+        
         <xctk:WatermarkTextBox x:Name="PriceTextBox" Watermark="Price" Margin="0,10,0,10"/>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">

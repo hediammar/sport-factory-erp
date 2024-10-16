@@ -51,6 +51,7 @@ namespace SportFactoryApp.Members
                 _context.Members.Add(newMember);
                 _context.SaveChanges();
                 LoadMembers(); // Refresh the list
+                
             }
         }
 
@@ -64,6 +65,7 @@ namespace SportFactoryApp.Members
                 {
                     _context.SaveChanges(); // Save changes made in the update window
                     LoadMembers(); // Refresh the list
+                    LoadMemberships();
                 }
             }
             else
@@ -80,6 +82,7 @@ namespace SportFactoryApp.Members
                 _context.Members.Remove(selectedMember);
                 _context.SaveChanges();
                 LoadMembers(); // Refresh the list
+                LoadMemberships();
             }
             else
             {
@@ -132,7 +135,7 @@ namespace SportFactoryApp.Members
                 MessageBox.Show("Please select a membership to delete.");
             }
         }
-        private void MembersListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void MembersDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             // You can implement any logic you want to execute when a member is selected
             // For example, you might want to display details of the selected member:
@@ -143,17 +146,7 @@ namespace SportFactoryApp.Members
                 // LoadMembershipsForMember(selectedMember); // Optional method to implement
             }
         }
-        private void MembershipsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            // You can implement any logic you want to execute when a member is selected
-            // For example, you might want to display details of the selected member:
-            if (MembersDataGrid.SelectedItem is Member selectedMember)
-            {
-                // Display details or perform any actions with the selected member
-                // For example, you might load the memberships associated with the selected member
-                // LoadMembershipsForMember(selectedMember); // Optional method to implement
-            }
-        }
+        
         private void MembershipsDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e) // Update this line
         {
             if (MembershipsDataGrid.SelectedItem is Membership selectedMembership) // Update this line

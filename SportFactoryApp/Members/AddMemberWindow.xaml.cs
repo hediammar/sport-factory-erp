@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace SportFactoryApp.Members
 {
@@ -18,8 +19,10 @@ namespace SportFactoryApp.Members
             {
                 FirstName = FirstNameTextBox.Text,
                 LastName = LastNameTextBox.Text,
-                StartDate = DateTime.Now
-            };
+                StartDate = DateTime.Now,
+                Gender = (GenderComboBox.SelectedItem as ComboBoxItem)?.Content.ToString(), // Get selected gender
+                BirthDate = BirthDatePicker.SelectedDate // Get the selected birthdate
+        };
             DialogResult = true; // Close the window and return true
             Close();
         }

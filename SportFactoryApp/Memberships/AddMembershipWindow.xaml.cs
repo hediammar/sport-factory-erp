@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace SportFactoryApp.Memberships
 {
@@ -36,7 +37,8 @@ namespace SportFactoryApp.Memberships
                 NewMembership = new Membership
                 {
                     MemberId = selectedMember.MemberId,
-                    Type = TypeTextBox.Text,
+                    Type = (MembershipType.SelectedItem as ComboBoxItem)?.Content.ToString(),
+                   // Type = TypeTextBox.Text,
                     Price = price,
                     Status = "Active",
                     Date = DateTime.Now

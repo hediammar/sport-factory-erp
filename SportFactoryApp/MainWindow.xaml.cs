@@ -11,22 +11,13 @@ namespace SportFactoryApp
 {
     public partial class MainWindow : Window
     {
-        private List<string> _allItems;
+        
         public MainWindow()
         {
             InitializeComponent();
             LoadUserProfile(); // Load user profile on startup
             ShowMembersView(); // Default view
-            _allItems = new List<string>
-            {
-                "John Doe",
-                "Jane Smith",
-                "Mike Johnson",
-                "Sport Factory",
-                "Mary Lee",
-                "James Anderson",
-                "Sport Factory Gym"
-            };
+            
         }
 
         private void TitleBar_MouseDown(object sender, MouseButtonEventArgs e)

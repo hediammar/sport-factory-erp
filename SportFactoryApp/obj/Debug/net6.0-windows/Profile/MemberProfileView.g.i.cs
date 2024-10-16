@@ -52,7 +52,7 @@ namespace SportFactoryApp.Profile {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/SportFactoryApp;component/profile/memberprofileview.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/SportFactoryApp;V1.0.0.0;component/profile/memberprofileview.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Profile\MemberProfileView.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

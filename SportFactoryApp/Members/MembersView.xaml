@@ -7,10 +7,12 @@
         <!-- Members Section -->
         <TextBlock Text="Members" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
 
-        <DataGrid x:Name="MembersDataGrid" AutoGenerateColumns="False" SelectionChanged="MembershipsDataGrid_SelectionChanged">
+        <DataGrid x:Name="MembersDataGrid" AutoGenerateColumns="False" SelectionChanged="MembersDataGrid_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Nom de Membre" Binding="{Binding FirstName}" />
                 <DataGridTextColumn Header="Prenom de Membre" Binding="{Binding LastName}" />
+                <DataGridTextColumn Header="Gendre" Binding="{Binding Gender}" />
+                <DataGridTextColumn Header="Date de naissance " Binding="{Binding BirthDate}" />
                 <DataGridTextColumn Header="Date d'adherence " Binding="{Binding StartDate}" />
             </DataGrid.Columns>
         </DataGrid>
