@@ -12,7 +12,7 @@ public class GymContext : DbContext
     {
         if (!optionsBuilder.IsConfigured)
         {
-            optionsBuilder.UseSqlServer(@"Server=DESKTOP-NOH724N;Database=SportFactory;Trusted_Connection=True;TrustServerCertificate=True;");
+            optionsBuilder.UseSqlServer(@"Server=DESKTOP-NOH724N;Database=SportFactory;Trusted_Connection=True;TrustServerCertificate=True;").EnableSensitiveDataLogging(); ;
         }
     }
 

@@ -6,12 +6,14 @@ using SportFactoryApp.Members;
 using SportFactoryApp.Profile;
 using System.Collections.Generic;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 
 namespace SportFactoryApp
 {
     public partial class MainWindow : Window
     {
-        
+        private ToggleButton _lastCheckedButton;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -78,13 +80,41 @@ namespace SportFactoryApp
             }
         }
 
-        private void MembersButton_Click(object sender, RoutedEventArgs e)
+       /* private void MembersButton_Click(object sender, RoutedEventArgs e)
         {
             ShowMembersView();
+        }*/
+
+        private void MembersButton_Click(object sender, RoutedEventArgs e)
+        {
+            ToggleButton clickedButton = sender as ToggleButton;
+
+            // If there's a previously checked button and it's different from the clicked button, uncheck it
+            if (_lastCheckedButton != null && _lastCheckedButton != clickedButton)
+            {
+                _lastCheckedButton.IsChecked = false;
+            }
+
+            // Set the clicked button as the new last checked button
+            _lastCheckedButton = clickedButton;
+
+            var MembersView = new MembersView(); // Assuming ChargesView is a UserControl
+            MainContentControl.Content = MembersView;
         }
 
-        private void SessionsButton_Click(object sender, RoutedEventArgs e)
+        private void MembershipsButton_Click(object sender, RoutedEventArgs e)
         {
+            ToggleButton clickedButton = sender as ToggleButton;
+
+            // If there's a previously checked button and it's different from the clicked button, uncheck it
+            if (_lastCheckedButton != null && _lastCheckedButton != clickedButton)
+            {
+                _lastCheckedButton.IsChecked = false;
+            }
+
+            // Set the clicked button as the new last checked button
+            _lastCheckedButton = clickedButton;
+
             var MembersView = new MembersView(); // Assuming ChargesView is a UserControl
             MainContentControl.Content = MembersView;
         }
@@ -193,7 +223,19 @@ namespace SportFactoryApp
             memberProfileView.DataContext = selectedMember;  // Optionally, bind the selected member to the DataContext
             MainContentControl.Content = memberProfileView;  // Display the profile in the main content area
         }
+        private void ToggleButton_Click(object sender, RoutedEventArgs e)
+        {
+            ToggleButton clickedButton = sender as ToggleButton;
 
+            // If there's a previously checked button and it's different from the clicked button, uncheck it
+            if (_lastCheckedButton != null && _lastCheckedButton != clickedButton)
+            {
+                _lastCheckedButton.IsChecked = false;
+            }
+
+            // Set the clicked button as the new last checked button
+            _lastCheckedButton = clickedButton;
+        }
 
 
 

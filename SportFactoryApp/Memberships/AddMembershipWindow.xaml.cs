@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore.Storage;
+using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -33,20 +34,44 @@ namespace SportFactoryApp.Memberships
             if (MemberComboBox.SelectedItem is Member selectedMember &&
                 decimal.TryParse(PriceTextBox.Text, out decimal price))
             {
-                // Create a new membership object
-                NewMembership = new Membership
+                String? type = (MembershipType.SelectedItem as ComboBoxItem)?.Content.ToString();
+                if (type == "Seance Unique")
                 {
-                    MemberId = selectedMember.MemberId,
-                    Type = (MembershipType.SelectedItem as ComboBoxItem)?.Content.ToString(),
-                   // Type = TypeTextBox.Text,
-                    Price = price,
-                    Status = "Active",
-                    Date = DateTime.Now
-                    // Do not assign MembershipId here
-                };
+                    // Create a new membership object
+                    NewMembership = new Membership
+                    {
+                        MemberId = selectedMember.MemberId,
+                        Type = (MembershipType.SelectedItem as ComboBoxItem)?.Content.ToString(),
+                        // Type = TypeTextBox.Text,
 
-                _context.Membershipss.Add(NewMembership);
-                _context.SaveChanges();
+                        Price = price,
+                        Status = "Desactive",
+                        Date = DateTime.Now
+                        // Do not assign MembershipId here
+                    };
+
+                    _context.Membershipss.Add(NewMembership);
+                    _context.SaveChanges();
+                }
+                else
+                {
+
+                    // Create a new membership object
+                    NewMembership = new Membership
+                    {
+                        MemberId = selectedMember.MemberId,
+                        Type = (MembershipType.SelectedItem as ComboBoxItem)?.Content.ToString(),
+                        // Type = TypeTextBox.Text,
+
+                        Price = price,
+                        Status = "Active",
+                        Date = DateTime.Now
+                        // Do not assign MembershipId here
+                    };
+
+                    _context.Membershipss.Add(NewMembership);
+                    _context.SaveChanges();
+                }
 
                 MessageBox.Show("Membership added successfully!");
                 this.DialogResult = true; // Set dialog result to true

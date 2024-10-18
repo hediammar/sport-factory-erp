@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 public class Member
 {
@@ -9,4 +10,6 @@ public class Member
     public string Gender { get; set; }
     public DateTime? BirthDate { get; set; }
     public string FullName => $"{FirstName} {LastName}";
+
+    public List<Membership> Memberships { get; set; }
 }

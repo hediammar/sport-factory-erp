@@ -7,7 +7,7 @@
         <!-- Members Section -->
         <TextBlock Text="Members" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
 
-        <DataGrid x:Name="MembersDataGrid" AutoGenerateColumns="False" SelectionChanged="MembersDataGrid_SelectionChanged">
+        <DataGrid x:Name="MembersDataGrid" AutoGenerateColumns="False" SelectionChanged="MembersDataGrid_SelectionChanged" BorderThickness="0" CanUserAddRows="False" CanUserResizeRows="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Nom de Membre" Binding="{Binding FirstName}" />
                 <DataGridTextColumn Header="Prenom de Membre" Binding="{Binding LastName}" />
@@ -25,7 +25,7 @@
         <!-- Memberships Section -->
         <TextBlock Text="Latest Memberships" FontSize="16" FontWeight="Bold" Margin="0,20,0,10"/>
 
-        <DataGrid x:Name="MembershipsDataGrid" AutoGenerateColumns="False" SelectionChanged="MembershipsDataGrid_SelectionChanged">
+        <DataGrid x:Name="MembershipsDataGrid" AutoGenerateColumns="False" SelectionChanged="MembershipsDataGrid_SelectionChanged" BorderThickness="0" CanUserAddRows="False" CanUserResizeRows="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Membre" Binding="{Binding Member.FullName}" />
                 <DataGridTextColumn Header="Type d'abonnement" Binding="{Binding Type}" />

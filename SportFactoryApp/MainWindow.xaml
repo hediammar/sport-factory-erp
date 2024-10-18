@@ -13,38 +13,47 @@
         WindowState="Maximized">
 
     <Window.Resources>
-        <Style x:Key="SidebarButtonStyle" TargetType="Button">
+        <Style x:Key="SidebarButtonStyle" TargetType="ToggleButton">
             <Setter Property="FontFamily" Value="Arial"/>
             <Setter Property="FontSize" Value="14"/>
-            <Setter Property="Foreground" Value="#34495E"/>
+            <Setter Property="Foreground" Value="Black"/>
             <Setter Property="Background" Value="#FFFFFF"/>
             <Setter Property="Padding" Value="10,5"/>
             <Setter Property="Margin" Value="10"/>
             <Setter Property="Height" Value="40"/>
             <Setter Property="BorderBrush" Value="#CCCCCC"/>
-            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="HorizontalAlignment" Value="Stretch"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Template">
                 <Setter.Value>
-                    <ControlTemplate TargetType="Button">
+                    <ControlTemplate TargetType="ToggleButton">
                         <Border CornerRadius="20" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+
+            <!-- Triggers for mouse hover and pressed states -->
             <Style.Triggers>
+                <!-- Hover -->
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="#34495E"/>
+                    <Setter Property="Background" Value="Black"/>
+                    <Setter Property="Foreground" Value="#FFFFFF"/>
+                </Trigger>
+
+                <!-- Pressed/Checked State -->
+                <Trigger Property="IsChecked" Value="True">
+                    <Setter Property="Background" Value="Black"/>
                     <Setter Property="Foreground" Value="#FFFFFF"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
     </Window.Resources>
 
-    <Grid>
+    <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <!-- Custom Title Bar -->
@@ -53,7 +62,7 @@
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="300"/>
             <!-- Sidebar -->
             <ColumnDefinition Width="*"/>
             <!-- Main Content Area -->
@@ -87,7 +96,7 @@
                 <Button x:Name="CloseButton"
                 Content="X"
                 Background="Black" 
-                Foreground="#C0C0C0" 
+                Foreground="Red" 
                 BorderBrush="Black" 
                 Width="40"
                 Click="CloseButton_Click"/>
@@ -95,15 +104,16 @@
         </Grid>
 
         <!-- Top Bar (Search, Notification, Profile) -->
-        <Grid Grid.Row="0" Grid.Column="1" Background="#EDEDED" Height="50" VerticalAlignment="Top" Margin="0,30,0,0">
+        <Grid Grid.Row="0" Grid.Column="1" Background="White" Height="50" VerticalAlignment="Top" Margin="0,40,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-
+            
+            
             <!-- Search Bar with AutoComplete -->
-            <Border CornerRadius="15" Background="White" Grid.Column="0" Margin="10,0,50,5" Padding="10">
+            <Border CornerRadius="15" Background="#f0f2f5" Grid.Column="0" Margin="0,0,50,5" Padding="10" HorizontalAlignment="Right" Width="200">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
@@ -120,7 +130,7 @@
                     <!-- Search TextBox -->
                     <xctk:WatermarkTextBox x:Name="SearchTextBox" Grid.Column="1" Height="30" VerticalAlignment="Center" 
                                        Watermark="Tap to search..." BorderThickness="0" Padding="5,5" 
-                                       TextChanged="SearchTextBox_TextChanged" />
+                                       TextChanged="SearchTextBox_TextChanged" Background="#f0f2f5"/>
 
                     <!-- Autocomplete Popup -->
                     <Popup x:Name="SearchResultPopup" PlacementTarget="{Binding ElementName=SearchTextBox}" 
@@ -137,10 +147,11 @@
             </Border>
 
             <!-- Notification Button -->
-            <Button Width="40" Height="40" Background="Transparent" BorderBrush="Transparent" Grid.Column="1" VerticalAlignment="Center">
-                <Image Source="pack://application:,,,/Images/icons8-notifications-30.png" Width="25"/>
-            </Button>
-
+            <Border Width="40" Height="40" Margin="0,0,0,0" ClipToBounds="True" HorizontalAlignment="Right" CornerRadius="20" Background="White">
+                <Button Width="40" Height="40" Background="Transparent" BorderBrush="Transparent" Grid.Column="1" VerticalAlignment="Center">
+                    <Image Source="pack://application:,,,/Images/icons8-notifications-30.png" Width="25"/>
+                </Button>
+            </Border>
             <!-- Profile Section -->
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Grid.Column="2" Margin="10,0,10,0">
                 <Ellipse Width="40" Height="40" HorizontalAlignment="Right"  Margin="0,0,10,0">
@@ -153,30 +164,55 @@
         </Grid>
 
         <!-- Sidebar -->
-        <StackPanel x:Name="Sidebar" Background="#EDEDED" HorizontalAlignment="Center" Width="200" VerticalAlignment="Stretch" Grid.RowSpan="2" Margin="0,30,0,0">
-            <Image x:Name="LogoImage" Source="pack://application:,,,/Images/SFLogo.png" Height="70" Margin="10" VerticalAlignment="Top" HorizontalAlignment="Center" />
-            <Button Style="{StaticResource SidebarButtonStyle}" Click="MembersButton_Click">
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                    <Image Source="pack://application:,,,/Images/icons8-accueil-30.png" Height="20" Margin="0,0,5,0"/>
-                    <TextBlock Text="Overview" VerticalAlignment="Center"/>
-                </StackPanel>
-            </Button>
-            <Button Style="{StaticResource SidebarButtonStyle}" Click="SessionsButton_Click" Cursor="Hand">
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                    <Image Source="pack://application:,,,/Images/icons8-membre-30.png" Height="20" Margin="0,0,5,0"/>
-                    <TextBlock Text="Client" VerticalAlignment="Center"/>
-                </StackPanel>
-            </Button>
-        </StackPanel>
 
+        <Border CornerRadius="20" Background="White" Grid.RowSpan="2" Grid.Column="0" Margin="0,30,0,0" VerticalAlignment="Stretch">
+            <StackPanel x:Name="Sidebar" HorizontalAlignment="Center" VerticalAlignment="Stretch">
+                <Image x:Name="LogoImage" Source="pack://application:,,,/Images/SFLogo.png" Height="100" Margin="10" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                <TextBlock Margin="15" FontFamily="Sequel Sans" FontWeight="Bold" FontSize="30"><Run Text="Bienvenue à"/><LineBreak/><Run Text="Factory System!"></Run></TextBlock>
+
+
+                <ToggleButton x:Name="OverviewToggleButton" Style="{StaticResource SidebarButtonStyle}" 
+              Click="ToggleButton_Click" Width="250" Height="40">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Width="250">
+                        <Image Source="pack://application:,,,/Images/icons8-accueil-30.png" Height="30" Margin="15,0,10,0"/>
+                        <TextBlock Text="Overview" VerticalAlignment="Center" FontFamily="DN Sans" Margin="5"/>
+                    </StackPanel>
+                </ToggleButton>
+
+                <ToggleButton Style="{StaticResource SidebarButtonStyle}" Click="MembersButton_Click" Width="250" Height="40" BorderThickness="0">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Width="250">
+                        <Image Source="pack://application:,,,/Images/icons8-conférence-30.png" Height="30" Margin="15,0,10,0"/>
+                        <TextBlock Text="Membres" VerticalAlignment="Center" Margin="5"/>
+                    </StackPanel>
+                </ToggleButton>
+
+                <ToggleButton x:Name="MembershipToggleButton" Style="{StaticResource SidebarButtonStyle}" 
+              Click="MembershipsButton_Click" Width="250" Height="40">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Width="250">
+                        <Image Source="pack://application:,,,/Images/icons8-carte-de-membre-30.png" Height="30" Margin="15,0,10,0"/>
+                        <TextBlock Text="Abonnements" VerticalAlignment="Center" Margin="5"/>
+                    </StackPanel>
+                </ToggleButton>
+
+
+                <!-- Additional Sidebar Buttons -->
+
+            </StackPanel>
+        </Border>
+
+
+        <Border CornerRadius="30" Grid.Row="1" Grid.Column="1" Margin="0,0,0,0" Background="#f0f2f5"> 
         <!-- Main Content Area -->
-        <Grid x:Name="MainContent" Grid.Row="1" Grid.Column="1" Margin="0,0,0,0">
-            <ContentControl x:Name="MainContentControl"/>
+            <Grid x:Name="MainContent">
+                <ContentControl x:Name="MainContentControl"/>
+            
             <!-- Powered By Section -->
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,5">
                 <TextBlock Text="Powered By"  FontFamily="Roboto"  FontWeight="Bold" VerticalAlignment="Center" FontSize="15" Foreground="Black" Margin="0,0,0,0"/>
                 <Image Source="pack://application:,,,/Images/awm.png" Height="50" Width="50" Margin="5,0"/>
             </StackPanel>
         </Grid>
+        </Border>
+        
     </Grid>
 </Window>

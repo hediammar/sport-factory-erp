@@ -12,9 +12,9 @@ TRACE;DEBUG;NET;NET6_0;NETCOREAPP
 C:\Users\21650\Desktop\SportFactoryApp\SportFactoryApp\App.xaml
 10921448651
 
-30-617910300
+30-1473721051
 248-1651016107
 LoadingWindow.xaml;LoginWindow.xaml;MainWindow.xaml;Memberships\AddMembershipWindow.xaml;Memberships\UpdateMembershipWindow.xaml;Members\AddMemberWindow.xaml;Members\MembersView.xaml;Members\UpdateMemberWindow.xaml;Overview\OverViewView.xaml;Profile\MemberProfileView.xaml;
 
-False
+True
 

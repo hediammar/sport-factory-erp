@@ -119,3 +119,4 @@ C:\Users\21650\Desktop\SportFactoryApp\SportFactoryApp\obj\Debug\net6.0-windows\
 C:\Users\21650\Desktop\SportFactoryApp\SportFactoryApp\obj\Debug\net6.0-windows\ref\SportFactoryApp.dll
 C:\Users\21650\Desktop\SportFactoryApp\SportFactoryApp\obj\Debug\net6.0-windows\Profile\MemberProfileView.baml
 C:\Users\21650\Desktop\SportFactoryApp\SportFactoryApp\obj\Debug\net6.0-windows\Profile\MemberProfileView.g.cs
+C:\Users\21650\Desktop\SportFactoryApp\SportFactoryApp\obj\Debug\net6.0-windows\GeneratedInternalTypeHelper.g.cs
