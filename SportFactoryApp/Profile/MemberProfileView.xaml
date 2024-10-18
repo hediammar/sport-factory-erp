@@ -9,7 +9,7 @@
         <local:GenderToImageConverter x:Key="GenderToImageConverter"/>
     </UserControl.Resources>
 
-    <Grid Margin="50">
+    <Grid Margin="30">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="250"/>
             <ColumnDefinition Width="*"/>
@@ -21,7 +21,7 @@
         </Grid.RowDefinitions>
 
         <!-- Profile Information Container -->
-        <Border Grid.Column="0" Grid.RowSpan="2" MaxHeight="350" CornerRadius="10" BorderBrush="Gray" BorderThickness="2" Padding="10" Background="White" Margin="0,0,10,0" VerticalAlignment="Top">
+        <Border Grid.Column="0" Grid.RowSpan="2" MaxHeight="350" CornerRadius="30" BorderBrush="Gray" BorderThickness="0" Padding="10" Background="White" Margin="10" VerticalAlignment="Top">
             <StackPanel>
                 <TextBlock Text="Member Profile" FontSize="20" FontWeight="Bold" Margin="0,0,0,10" HorizontalAlignment="Center"/>
 
@@ -49,9 +49,9 @@
         </Border>
         <Border Grid.Column="1" Grid.Row="0">
             <!-- Card Section -->
-            <StackPanel Orientation="Horizontal"  Margin="0,0,0,10" Height="150" VerticalAlignment="Top" HorizontalAlignment="Right">
+            <StackPanel Orientation="Horizontal"  Margin="10" Height="150" VerticalAlignment="Top" HorizontalAlignment="Right">
                 <!-- Card 1: Membership Count -->
-                <Border CornerRadius="10" BorderBrush="Gray" BorderThickness="1" Background="White" Padding="20" Margin="5" Width="Auto">
+                <Border CornerRadius="30" BorderBrush="Gray" BorderThickness="0" Background="White" Padding="20" Margin="5" Width="Auto">
                     <StackPanel HorizontalAlignment="Center">
                         <TextBlock Text="Nombre d'abon" FontWeight="Bold" FontSize="14"/>
                         <TextBlock x:Name="MembershipCountTextBlock" FontSize="22" FontWeight="Bold"/>
@@ -59,7 +59,7 @@
                 </Border>
 
                 <!-- Card 2: Revenue Generated -->
-                <Border CornerRadius="10" BorderBrush="Gray" BorderThickness="1" Background="White" Padding="20" Margin="5" Width="Auto">
+                <Border CornerRadius="30" BorderBrush="Gray" BorderThickness="0" Background="White" Padding="20" Margin="5" Width="Auto">
                     <StackPanel HorizontalAlignment="Center">
                         <TextBlock Text="Total Revenue" FontWeight="Bold" FontSize="14"/>
                         <TextBlock x:Name="TotalRevenueTextBlock" FontSize="22" FontWeight="Bold"/>
@@ -67,7 +67,7 @@
                 </Border>
 
                 <!-- Card 3: Session Count -->
-                <Border CornerRadius="10" BorderBrush="Gray" BorderThickness="1" Background="white" Padding="20" Margin="5" Width="Auto" >
+                <Border CornerRadius="30" BorderBrush="Gray" BorderThickness="0" Background="white" Padding="20" Margin="5" Width="Auto" >
                     <StackPanel HorizontalAlignment="Center">
                         <TextBlock Text="Total Sessions" FontWeight="Bold" FontSize="14"/>
                         <TextBlock Text="N/A" FontSize="22" FontWeight="Bold" HorizontalAlignment="Center" Margin="10"/>
@@ -77,7 +77,7 @@
             </StackPanel>
         </Border>
         <!-- Membership Cards and List Container -->
-        <Border Grid.Column="1" Grid.Row="1" CornerRadius="10" BorderBrush="Gray" BorderThickness="2" Padding="10" Background="White" VerticalAlignment="Top">
+        <Border Margin="10" Grid.Column="1" Grid.Row="1" CornerRadius="30" BorderBrush="Gray" BorderThickness="0" Padding="10" Background="White" VerticalAlignment="Top">
             <StackPanel>
                
 
@@ -99,7 +99,7 @@
             </StackPanel>
         </Border>
 
-        <Border Grid.Column="1" Grid.Row="2" CornerRadius="10" BorderBrush="Gray" BorderThickness="2" Padding="10" Background="White" VerticalAlignment="Top">
+        <Border Margin="10" Grid.Column="1" Grid.Row="2" CornerRadius="30" BorderBrush="Gray" BorderThickness="0" Padding="10" Background="White" VerticalAlignment="Top">
             <StackPanel>
                 <TextBlock Text="Sessions" FontSize="20" FontWeight="Bold" Margin="20,0,0,0"/>
 
