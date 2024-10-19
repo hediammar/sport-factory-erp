@@ -7,19 +7,23 @@ using SportFactoryApp.Profile;
 using System.Collections.Generic;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using SportFactory.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace SportFactoryApp
 {
     public partial class MainWindow : Window
     {
         private ToggleButton _lastCheckedButton;
+        private int _selectedRecipientId;
 
         public MainWindow()
         {
             InitializeComponent();
             LoadUserProfile(); // Load user profile on startup
             ShowMembersView(); // Default view
-            
+            LoadUsers(); // Load users into the ComboBox
+
         }
 
         private void TitleBar_MouseDown(object sender, MouseButtonEventArgs e)
@@ -80,10 +84,10 @@ namespace SportFactoryApp
             }
         }
 
-       /* private void MembersButton_Click(object sender, RoutedEventArgs e)
-        {
-            ShowMembersView();
-        }*/
+        /* private void MembersButton_Click(object sender, RoutedEventArgs e)
+         {
+             ShowMembersView();
+         }*/
 
         private void MembersButton_Click(object sender, RoutedEventArgs e)
         {
@@ -236,6 +240,103 @@ namespace SportFactoryApp
             // Set the clicked button as the new last checked button
             _lastCheckedButton = clickedButton;
         }
+
+        // Load users into ComboBox for selection
+        private void LoadUsers()
+        {
+            try
+            {
+                using (var context = new GymContext())
+                {
+                    var users = context.Users.Where(u => u.Id != LogSession.CurrentUserId).ToList();
+                    UserComboBox.ItemsSource = users;
+                    UserComboBox.DisplayMemberPath = "Username"; // Show usernames in the dropdown
+                    UserComboBox.SelectedValuePath = "Id"; // Bind user ID
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error loading users: {ex.Message}");
+            }
+        }
+
+        // Event triggered when a user is selected from the ComboBox
+        private void UserComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (UserComboBox.SelectedValue != null)
+            {
+                _selectedRecipientId = (int)UserComboBox.SelectedValue;
+                LoadChatHistory(); // Load the chat history between the logged-in user and selected user
+            }
+        }
+
+        // Load chat history between the logged-in user and the selected recipient
+        private void LoadChatHistory()
+        {
+            try
+            {
+                using (var context = new GymContext())
+                {
+                    var messages = context.Messages
+                        .Where(m => (m.SenderID == LogSession.CurrentUserId && m.ReceiverID == _selectedRecipientId) ||
+                                    (m.SenderID == _selectedRecipientId && m.ReceiverID == LogSession.CurrentUserId))
+                        .OrderBy(m => m.MessageDateTime)
+                        .ToList();
+
+                    ChatHistoryListBox.Items.Clear();
+                    foreach (var message in messages)
+                    {
+                        ChatHistoryListBox.Items.Add($"{(message.SenderID == LogSession.CurrentUserId ? "You" : UserComboBox.Text)}: {message.Content}");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error loading chat history: {ex.Message}");
+            }
+        }
+
+        // Event triggered when the Send button is clicked
+        private void SendMessageButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(ChatInputTextBox.Text) && _selectedRecipientId != 0)
+            {
+                try
+                {
+                    using (var context = new GymContext())
+                    {
+                        var message = new Message
+                        {
+                            Content = ChatInputTextBox.Text,
+                            MessageDateTime = DateTime.Now,
+                            SenderID = LogSession.CurrentUserId,
+                            ReceiverID = _selectedRecipientId
+                        };
+                        try
+                        { 
+                        context.Messages.Add(message);
+                        context.SaveChanges();
+                        }
+                        catch (DbUpdateException ex)
+                        {
+                            MessageBox.Show($"Error sending message: {ex.InnerException?.Message ?? ex.Message}");
+                        }
+                    }
+
+                    ChatInputTextBox.Clear(); // Clear input field
+                    LoadChatHistory(); // Refresh chat history after sending the message
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error sending message: {ex.Message}");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select a recipient and enter a message.");
+            }
+        }
+
 
 
 

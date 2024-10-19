@@ -2,7 +2,7 @@
 
 namespace SportFactoryApp
 {
-    public class User
+    public class Users
     {
         [Key]
         public int Id { get; set; }

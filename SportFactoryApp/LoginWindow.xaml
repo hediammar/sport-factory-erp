@@ -16,13 +16,17 @@
     </Window.Resources>
 
     <Grid Name="LoginGrid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
         <!-- Background Image -->
         <Grid.Background>
-            <ImageBrush ImageSource="pack://application:,,,/Images/login_background.jpg" Stretch="UniformToFill"/>
+            <ImageBrush ImageSource="pack://application:,,,/Images/SFCover.png" Stretch="UniformToFill"/>
         </Grid.Background>
 
         <!-- Custom Title Bar -->
-        <Grid Height="30" VerticalAlignment="Top" Background="Black" MouseDown="TitleBar_MouseDown">
+        <Grid Height="30" VerticalAlignment="Top" Background="Black" MouseDown="TitleBar_MouseDown" Grid.ColumnSpan="2">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                 <Image Source="pack://application:,,,/Images/SFLogo.png" Height="25" Width="25" Margin="10"/>
                 <TextBlock Text="SPORT FACTORY ERP" VerticalAlignment="Center" 
@@ -57,31 +61,31 @@
         </Grid>
 
         <!-- Logo at the top left -->
-        <Image Source="pack://application:,,,/Images/SFLogo.png" Height="150" Margin="50" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        
 
         <!-- White card with shadow -->
-        <Border Background="White" CornerRadius="50" Padding="20" Width="300" Height="400" 
-                VerticalAlignment="Center" HorizontalAlignment="Center">
+        <Border Background="White" CornerRadius="50" Padding="20" Width="400" Height="550" 
+                VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1" >
             <Border.Effect>
-                <DropShadowEffect BlurRadius="10" ShadowDepth="5" Opacity="0.5"/>
+                <DropShadowEffect BlurRadius="30" ShadowDepth="20" Opacity="1"/>
             </Border.Effect>
 
             <!-- StackPanel inside the white card -->
-            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Height="400" Width="300">
-                <TextBlock Text="Welcome Back" FontSize="30" FontFamily="Calibri" Margin="50" HorizontalAlignment="Center" Foreground="#FF481D4B" FontWeight="Bold"/>
-
-                <Border Background="White" CornerRadius="10" BorderBrush="#CCCCCC" BorderThickness="1" Margin="50,0,50,50">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center"  Height="500" Width="350">
+                <TextBlock  FontSize="50" FontFamily="DN Sans" FontWeight="Bold" Margin="10" HorizontalAlignment="Center" Foreground="Black"><Run Text="BONJOUR"/><LineBreak/><Run Text="YE BDAN!"></Run></TextBlock>
+                <TextBlock Text="Username" FontSize="20" FontFamily="DN Sans" FontWeight="Bold" Margin="20,0,20,10"></TextBlock>
+                <Border Background="White" CornerRadius="20" BorderBrush="#D3D3D3" BorderThickness="3" Margin="20,0,20,20">
                     <xctk:WatermarkTextBox Name="UsernameTextBox" FontSize="20" Watermark="Username" 
-                                           Height="50" Padding="5"/>
+                                           Height="50" Padding="10" FontFamily="DN Sans" Background="Transparent" BorderThickness="0"/>
                 </Border>
-
-                <Border Background="White" CornerRadius="10" BorderBrush="#CCCCCC" BorderThickness="1" Margin="50,0,50,0">
+                <TextBlock Text="Mot de passe" FontSize="20" FontFamily="DN Sans" FontWeight="Bold" Margin="20,0,20,10"></TextBlock>
+                <Border Background="Transparent" CornerRadius="20" BorderBrush="#D3D3D3" BorderThickness="2" Margin="20,0,20,0">
                     <xctk:WatermarkPasswordBox Name="PasswordBox" FontSize="20" Watermark="Password" 
-                                               Height="50" Padding="5"/>
+                                               Height="50" Padding="10" VerticalAlignment="Center" FontFamily="DN Sans" Background="Transparent" BorderThickness="0"/>
                 </Border>
 
-                <Button Name="LoginButton" Content="Login" Click="LoginButton_Click" Height="50" 
-                        Background="#FF471C4D" Foreground="White" Margin="30" Padding="5" FontFamily="Calibri" FontSize="30" FontWeight="Bold">
+                <Button Name="LoginButton" Content="Se Connecter" Click="LoginButton_Click" Height="50" 
+                        Background="Black" Foreground="White" Margin="30" Padding="5" FontFamily="DN Sans" FontSize="30" FontWeight="Bold">
                     <Button.Style>
                         <Style TargetType="Button">
                             <Setter Property="BorderBrush" Value="Transparent"/>
@@ -91,7 +95,7 @@
                                 <Setter.Value>
                                     <ControlTemplate TargetType="Button">
                                         <Border Background="{TemplateBinding Background}" 
-                                                CornerRadius="10">
+                                                CornerRadius="30">
                                             <!-- Rounded Button -->
                                             <ContentPresenter HorizontalAlignment="Center" 
                                                               VerticalAlignment="Center"/>
@@ -111,7 +115,7 @@
         </Border>
 
         <!-- Powered By Section -->
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,20">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,20" Grid.ColumnSpan="2">
             <TextBlock Text="Powered By" FontFamily="Roboto" FontWeight="Bold" VerticalAlignment="Center" FontSize="20" Foreground="White" Margin="0,0,0,0"/>
             <Image Source="pack://application:,,,/Images/awm.png" Height="50" VerticalAlignment="Center"/>
         </StackPanel>

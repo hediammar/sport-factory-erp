@@ -35,6 +35,7 @@
     <None Remove="Images\login_background3.jpg" />
     <None Remove="Images\maleicon.jpg" />
     <None Remove="Images\maleProfile.jpg" />
+    <None Remove="Images\SFCover.png" />
     <None Remove="Images\SFLogo.ico" />
     <None Remove="Images\SFLogo.png" />
   </ItemGroup>
@@ -131,6 +132,9 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\maleProfile.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\SFCover.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\SFLogo.ico">
