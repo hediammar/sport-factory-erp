@@ -20,6 +20,7 @@ namespace SportFactoryApp.Members
                 FirstName = FirstNameTextBox.Text,
                 LastName = LastNameTextBox.Text,
                 StartDate = DateTime.Now,
+                PhoneNumber = PhoneNumberTextBox.Text,
                 Gender = (GenderComboBox.SelectedItem as ComboBoxItem)?.Content.ToString(), // Get selected gender
                 BirthDate = BirthDatePicker.SelectedDate // Get the selected birthdate
         };

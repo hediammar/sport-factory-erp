@@ -9,6 +9,8 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using SportFactory.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace SportFactoryApp
 {
@@ -250,7 +252,6 @@ namespace SportFactoryApp
                 {
                     var users = context.Users.Where(u => u.Id != LogSession.CurrentUserId).ToList();
                     UserComboBox.ItemsSource = users;
-                    UserComboBox.DisplayMemberPath = "Username"; // Show usernames in the dropdown
                     UserComboBox.SelectedValuePath = "Id"; // Bind user ID
                 }
             }
@@ -271,22 +272,78 @@ namespace SportFactoryApp
         }
 
         // Load chat history between the logged-in user and the selected recipient
-        private void LoadChatHistory()
+
+        private async Task LoadChatHistory()
         {
             try
             {
                 using (var context = new GymContext())
                 {
-                    var messages = context.Messages
+                    var messages = await context.Messages
                         .Where(m => (m.SenderID == LogSession.CurrentUserId && m.ReceiverID == _selectedRecipientId) ||
                                     (m.SenderID == _selectedRecipientId && m.ReceiverID == LogSession.CurrentUserId))
                         .OrderBy(m => m.MessageDateTime)
-                        .ToList();
+                        .ToListAsync();
 
                     ChatHistoryListBox.Items.Clear();
+
                     foreach (var message in messages)
                     {
-                        ChatHistoryListBox.Items.Add($"{(message.SenderID == LogSession.CurrentUserId ? "You" : UserComboBox.Text)}: {message.Content}");
+                        // Create a new ListBoxItem for each message
+                        ListBoxItem messageItem = new ListBoxItem();
+
+                        // Create a StackPanel to hold the message content and the date
+                        StackPanel messagePanel = new StackPanel();
+                        messagePanel.Orientation = Orientation.Horizontal;
+                        messagePanel.Background = new SolidColorBrush(Colors.Transparent);
+
+                        // TextBlock for message content
+                        TextBlock messageContent = new TextBlock();
+                        messageContent.Text = message.Content;
+                        messageContent.FontWeight = FontWeights.Bold;
+                        messageContent.FontSize = 12;
+                        messageContent.Padding = new Thickness(10);
+
+                        // TextBlock for message date
+                        TextBlock messageDate = new TextBlock();
+                        messageDate.Text = message.MessageDateTime.ToString("dd MMM");
+                        messageDate.VerticalAlignment = VerticalAlignment.Bottom;
+                        messageContent.Margin = new Thickness(5);
+                        messageDate.FontSize = 10;
+                        messageDate.Foreground = new SolidColorBrush(Colors.Gray);
+                        messageDate.HorizontalAlignment = HorizontalAlignment.Right;
+
+                        // Add the message content and date to the StackPanel
+                        messagePanel.Children.Add(messageContent);
+                        messagePanel.Children.Add(messageDate);
+
+                        // Determine if the message is from the sender (current user) or receiver
+                        if (message.SenderID == LogSession.CurrentUserId)
+                        {
+
+                            // From the sender (current user)
+                            messageContent.Background = new SolidColorBrush(Colors.Black);
+                            messageContent.Foreground = new SolidColorBrush(Colors.White);
+                            messageItem.HorizontalAlignment = HorizontalAlignment.Right;
+                            messageItem.Content = messagePanel;
+                        }
+                        else
+                        {
+                            // From the receiver (other user)
+                            messageItem.Background = new SolidColorBrush(Colors.White);
+                            messageItem.Foreground = new SolidColorBrush(Colors.Black);
+                            messageItem.HorizontalAlignment = HorizontalAlignment.Left;
+                            messageItem.Content = messagePanel;
+                        }
+
+                        // Add the styled ListBoxItem to the ChatHistoryListBox
+                        ChatHistoryListBox.Items.Add(messageItem);
+                    }
+
+                    // Scroll to the latest message
+                    if (ChatHistoryListBox.Items.Count > 0)
+                    {
+                        ChatHistoryListBox.ScrollIntoView(ChatHistoryListBox.Items[ChatHistoryListBox.Items.Count - 1]);
                     }
                 }
             }
@@ -295,6 +352,8 @@ namespace SportFactoryApp
                 MessageBox.Show($"Error loading chat history: {ex.Message}");
             }
         }
+
+
 
         // Event triggered when the Send button is clicked
         private void SendMessageButton_Click(object sender, RoutedEventArgs e)
@@ -336,6 +395,51 @@ namespace SportFactoryApp
                 MessageBox.Show("Please select a recipient and enter a message.");
             }
         }
+
+        private T FindVisualChild<T>(DependencyObject parent, string childName) where T : DependencyObject
+        {
+            // Confirm parent is valid.
+            if (parent == null) return null;
+
+            T foundChild = null;
+
+            int childrenCount = VisualTreeHelper.GetChildrenCount(parent);
+            for (int i = 0; i < childrenCount; i++)
+            {
+                var child = VisualTreeHelper.GetChild(parent, i);
+                T childType = child as T;
+
+                // If the child is not of the target type, recursively drill down the tree.
+                if (childType != null)
+                {
+                    if (!string.IsNullOrEmpty(childName))
+                    {
+                        // If the child's name matches the specified name, return the child.
+                        var frameworkElement = child as FrameworkElement;
+                        if (frameworkElement != null && frameworkElement.Name == childName)
+                        {
+                            foundChild = (T)child;
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        // If the name is not specified, return the first child of the target type.
+                        foundChild = childType;
+                        break;
+                    }
+                }
+                else
+                {
+                    // Recursively drill down the tree.
+                    foundChild = FindVisualChild<T>(child, childName);
+                    if (foundChild != null) break;
+                }
+            }
+
+            return foundChild;
+        }
+
 
 
 

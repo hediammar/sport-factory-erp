@@ -18,7 +18,7 @@ namespace SportFactoryApp.Members
             // Load member details into the text boxes
             FirstNameTextBox.Text = _member.FirstName;
             LastNameTextBox.Text = _member.LastName;
-
+            PhoneNumberTextBox.Text = _member.PhoneNumber;
             // Set gender in ComboBox
             GenderComboBox.SelectedItem = _member.Gender; // Assuming Gender is a string matching ComboBoxItem Content
             BirthDatePicker.SelectedDate = _member.BirthDate; // Assuming BirthDate is a DateTime
@@ -29,6 +29,7 @@ namespace SportFactoryApp.Members
             // Update member details
             _member.FirstName = FirstNameTextBox.Text;
             _member.LastName = LastNameTextBox.Text;
+            _member.PhoneNumber = PhoneNumberTextBox.Text;
             _member.Gender = GenderComboBox.SelectedItem != null ? (GenderComboBox.SelectedItem as ComboBoxItem).Content.ToString() : null; // Get selected gender
             _member.BirthDate = BirthDatePicker.SelectedDate ?? DateTime.MinValue; // Handle date picker selection
 

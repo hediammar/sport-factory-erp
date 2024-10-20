@@ -2,24 +2,159 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:SportFactoryApp.Members"
+             xmlns:local1="clr-namespace:SportFactoryApp.Converters"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit">
+    <UserControl.Resources>
+
+        <local1:FirstLetterMultiConverter x:Key="FirstLetterMultiConverter"/>
+        
+
+    </UserControl.Resources>   
     <StackPanel>
         <!-- Members Section -->
         <TextBlock Text="Members" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
 
-        <DataGrid x:Name="MembersDataGrid" AutoGenerateColumns="False" SelectionChanged="MembersDataGrid_SelectionChanged" BorderThickness="0" CanUserAddRows="False" CanUserResizeRows="False">
+        <DataGrid x:Name="MembersDataGrid" 
+           
+          AutoGenerateColumns="False" 
+          SelectionChanged="MembersDataGrid_SelectionChanged"
+          BorderThickness="0"
+          CanUserAddRows="False" 
+          CanUserResizeRows="False"
+          FontWeight="Bold" 
+          FontFamily="DN Sans"
+          RowBackground="White"
+          Foreground="Black"
+          GridLinesVisibility="None"
+          HorizontalGridLinesBrush="Gray"
+          VerticalGridLinesBrush="Gray"
+          HeadersVisibility="Column"
+          ColumnHeaderHeight="40"
+          RowHeight="45"
+          FontSize="14"
+          
+          Padding="5"
+          Background="Transparent"
+                  HorizontalAlignment="Center">
+
+            <!-- Define DataGrid style for column headers -->
+            <DataGrid.ColumnHeaderStyle>
+                <Style TargetType="DataGridColumnHeader">
+                    <Setter Property="Background" Value="Transparent" />
+                    <Setter Property="Foreground" Value="Black"  />
+                    <Setter Property="FontSize" Value="15" />
+                    <Setter Property="HorizontalContentAlignment" Value="Left" />
+                    <Setter Property="Padding" Value="10,0,10,0" />
+                    <Setter Property="BorderThickness" Value="0,0,0,1" />
+                    <Setter Property="BorderBrush" Value="Gray" />
+                    
+                </Style>
+            </DataGrid.ColumnHeaderStyle>
+            <DataGrid.CellStyle>
+                <Style TargetType="DataGridCell">
+                    
+                    <Setter Property="FontSize" Value="15" />
+                    <Setter Property="HorizontalAlignment" Value="Left" />
+                    <Setter Property="VerticalAlignment" Value="Center"/>
+                    <Setter Property="Foreground" Value="Black" />
+                    <Setter Property="Margin" Value="0,0,10,0" />
+                    <Setter Property="FontWeight" Value="Bold" />
+                    <Setter Property="FontFamily" Value="DN Sans" />
+                    
+                </Style>
+            </DataGrid.CellStyle>
+            
+
+            <!-- Style for rows with CornerRadius and Margin -->
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="DataGridRow">
+                                <Border Background="{TemplateBinding Background}" 
+                                BorderBrush="Transparent" 
+                                CornerRadius="10" 
+                                
+                                Margin="2"
+                                SnapsToDevicePixels="True">
+                                    <DataGridCellsPresenter />
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="FontSize" Value="14" />
+                </Style>
+            </DataGrid.RowStyle>
+
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Nom de Membre" Binding="{Binding FirstName}" />
-                <DataGridTextColumn Header="Prenom de Membre" Binding="{Binding LastName}" />
+                <!-- Circle with Initials in FullName Column -->
+                <DataGridTemplateColumn Header="Nom de Membre" Width="250">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Width="250">
+                                <!-- Circle for Initials -->
+                                <Grid Width="40" Height="40" VerticalAlignment="Center" Margin="10,0,0,0">
+                                    <Ellipse Fill="#FF007ACC" Stroke="Transparent" Width="40" Height="40" />
+                                    <TextBlock FontSize="16" 
+                                       FontWeight="Bold"
+                                       Foreground="White"
+                                       HorizontalAlignment="Center" 
+                                       VerticalAlignment="Center">
+                                        <Run>
+                                            <Run.Text>
+        <MultiBinding Converter="{StaticResource FirstLetterMultiConverter}">
+            <Binding Path="FirstName" />
+            <Binding Path="LastName" />
+        </MultiBinding>
+    </Run.Text>
+                                        </Run>
+                                    </TextBlock>
+                                </Grid>
+                                <!-- Member Full Name next to the circle -->
+                                <TextBlock Text="{Binding FullName}" Margin="10,0,0,0" VerticalAlignment="Center" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Telephone" Binding="{Binding PhoneNumber}" />
                 <DataGridTextColumn Header="Gendre" Binding="{Binding Gender}" />
                 <DataGridTextColumn Header="Date de naissance " Binding="{Binding BirthDate}" />
                 <DataGridTextColumn Header="Date d'adherence " Binding="{Binding StartDate}" />
+                <DataGridTemplateColumn Header="Actions" Width="Auto">
+                    <DataGridTemplateColumn.CellTemplate >
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Button Content="Update" 
+                        Width="70" Height="25" 
+                        Margin="5,0"
+                        Click="UpdateMember_Click" 
+                        Background="#FF007ACC" 
+                        Foreground="White" 
+                        FontWeight="Bold" 
+                        BorderBrush="Transparent"
+                        Cursor="Hand"/>
+
+                                <!-- Delete Button -->
+                                <Button Content="Delete" 
+                        Width="70" Height="25" 
+                        Margin="5,0"
+                        Click="DeleteMember_Click" 
+                        Background="#FFE81123" 
+                        Foreground="White" 
+                        FontWeight="Bold" 
+                        BorderBrush="Transparent"
+                        Cursor="Hand"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
+
+
         <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
             <Button Content="Ajouter Membre" Click="AddMember_Click" Margin="5"/>
-            <Button Content="Mise à Jour Membre" Click="UpdateMember_Click" Margin="5"/>
-            <Button Content="Effacer Membre" Click="DeleteMember_Click" Margin="5"/>
+            
         </StackPanel>
 
         <!-- Memberships Section -->

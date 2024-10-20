@@ -5,7 +5,8 @@ using System.Windows;
 using System.Windows.Controls;
 using SportFactoryApp.Memberships;// Add this if AddMemberWindow is in the Members namespace
 using Microsoft.EntityFrameworkCore;
-
+using System.Windows.Input;
+using System.Windows.Media;
 
 namespace SportFactoryApp.Members
 {
@@ -34,12 +35,41 @@ namespace SportFactoryApp.Members
             MembersDataGrid.ItemsSource = members;
         }
 
-        // Load Memberships from the database and display them in the ListBox
-       /* private void LoadMemberships()
+        private void MembersDataGrid_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            var memberships = _context.Membershipss.ToList();
-            MembershipsListBox.ItemsSource = memberships;
-        }*/
+            // Get the clicked element
+            var clickedElement = e.OriginalSource as FrameworkElement;
+
+            // Check if the clicked element is a button within the DataGrid
+            if (clickedElement is Button)
+            {
+                return; // Allow button clicks
+            }
+
+            // Get the row under the mouse click
+            var row = FindParent<DataGridRow>(clickedElement);
+            if (row != null)
+            {
+                // Prevent the row from being selected
+                e.Handled = true;
+            }
+        }
+
+        // Helper method to find the parent of a specified type
+        private T FindParent<T>(DependencyObject child) where T : DependencyObject
+        {
+            while (child != null)
+            {
+                if (child is T parent)
+                {
+                    return parent;
+                }
+                child = VisualTreeHelper.GetParent(child);
+            }
+            return null;
+        }
+
+
 
         // Add Member Event Handler
         private void AddMember_Click(object sender, RoutedEventArgs e)
