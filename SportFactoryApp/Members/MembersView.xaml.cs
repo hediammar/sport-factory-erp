@@ -7,19 +7,22 @@ using SportFactoryApp.Memberships;// Add this if AddMemberWindow is in the Membe
 using Microsoft.EntityFrameworkCore;
 using System.Windows.Input;
 using System.Windows.Media;
+using SportFactoryApp.Profile;
+using static SportFactoryApp.MainWindow;
 
 namespace SportFactoryApp.Members
 {
     public partial class MembersView : UserControl
     {
         private GymContext _context;
-
-        public MembersView()
+        private MainWindow _mainWindow;
+        public MembersView(MainWindow mainWindow)
         {
             InitializeComponent();
             _context = new GymContext();
             LoadMembers();
             LoadMemberships();
+            _mainWindow = mainWindow;
         }
 
         private void LoadMemberships()
@@ -184,5 +187,65 @@ namespace SportFactoryApp.Members
                 // Implement any logic you want when a membership is selected
             }
         }
+        private void ShowMemberProfile_Click(object sender, RoutedEventArgs e)
+        {
+            // Ensure the _mainWindow instance is available
+            if (_mainWindow == null)
+            {
+                MessageBox.Show("Main window instance is not available.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            // Check if a member is selected in the DataGrid
+            if (MembersDataGrid.SelectedItem is Member selectedMember)
+            {
+                // Fetch member details based on the selected member ID
+                var member = GetMemberById(selectedMember.MemberId);
+
+                if (member != null)
+                {
+                    try
+                    {
+                        // Create the MemberProfileView UserControl
+                        var memberProfileView = new MemberProfileView(member);
+
+                        // Set the UserControl to MainContentControl in MainWindow
+                        _mainWindow.MainContentControl.Content = memberProfileView;
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"An error occurred while displaying member profile: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Member not found.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select a member.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
+
+
+        private Member GetMemberById(int memberId)
+        {
+            try
+            {
+                using (var context = new GymContext())
+                {
+                    // Fetch the member by ID from the database
+                    return context.Members.FirstOrDefault(m => m.MemberId == memberId);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred while retrieving member details: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return null;
+            }
+        }
+
+
     }
 }

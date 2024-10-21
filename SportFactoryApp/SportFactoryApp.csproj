@@ -27,7 +27,10 @@
     <None Remove="Images\icons8-conférence-30.png" />
     <None Remove="Images\icons8-entrepot-30.png" />
     <None Remove="Images\icons8-human-resources-30.png" />
+    <None Remove="Images\icons8-info-30.png" />
     <None Remove="Images\icons8-notifications-30.png" />
+    <None Remove="Images\icons8-redémarrer-30.png" />
+    <None Remove="Images\icons8-supprimer-pour-toujours-30.png" />
     <None Remove="Images\icons8-ventes-totales-30.png" />
     <None Remove="Images\InfinityLoader.gif" />
     <None Remove="Images\login_background.jpg" />
@@ -110,7 +113,16 @@
     <Resource Include="Images\icons8-human-resources-30.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Images\icons8-info-30.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\icons8-notifications-30.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\icons8-redémarrer-30.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\icons8-supprimer-pour-toujours-30.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\icons8-ventes-totales-30.png">

@@ -104,7 +104,7 @@ namespace SportFactoryApp
             // Set the clicked button as the new last checked button
             _lastCheckedButton = clickedButton;
 
-            var MembersView = new MembersView(); // Assuming ChargesView is a UserControl
+            var MembersView = new MembersView(this); // Assuming ChargesView is a UserControl
             MainContentControl.Content = MembersView;
         }
 
@@ -121,7 +121,7 @@ namespace SportFactoryApp
             // Set the clicked button as the new last checked button
             _lastCheckedButton = clickedButton;
 
-            var MembersView = new MembersView(); // Assuming ChargesView is a UserControl
+            var MembersView = new MembersView(this); // Assuming ChargesView is a UserControl
             MainContentControl.Content = MembersView;
         }
 
