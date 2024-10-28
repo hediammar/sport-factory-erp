@@ -5,6 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:SportFactoryApp"
+        xmlns:local1="clr-namespace:SportFactoryApp.Converters"
+        
         
         mc:Ignorable="d"
         Icon="pack://application:,,,/Images/SFLogo.ico"
@@ -15,6 +17,11 @@
 
 
     <Window.Resources>
+       
+
+            <local1:FirstLetterMultiConverter x:Key="FirstLetterMultiConverter"/>
+
+
         <Style x:Key="SidebarButtonStyle" TargetType="ToggleButton">
             <Setter Property="FontFamily" Value="Arial"/>
             <Setter Property="FontSize" Value="14"/>
@@ -108,7 +115,7 @@
         </Grid>
 
         <!-- Top Bar (Search, Notification, Profile) -->
-        <Grid Grid.Row="0" Grid.Column="1" Background="White" Height="50" VerticalAlignment="Top" Margin="0,40,0,0">
+        <Grid Grid.Row="0" Grid.Column="1" Background="White" Height="50" VerticalAlignment="Top" Margin="0,50,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
@@ -134,19 +141,33 @@
                     <!-- Search TextBox -->
                     <xctk:WatermarkTextBox x:Name="SearchTextBox" Grid.Column="1" Height="30" VerticalAlignment="Center" 
                                        Watermark="Tap to search..." BorderThickness="0" Padding="5,5" 
-                                       TextChanged="SearchTextBox_TextChanged" Background="#f0f2f5"/>
+                                       TextChanged="SearchTextBox_TextChanged" Background="#f0f2f5"
+                                           />
 
-                    <!-- Autocomplete Popup -->
                     <Popup x:Name="SearchResultPopup" PlacementTarget="{Binding ElementName=SearchTextBox}" 
-                           StaysOpen="False" AllowsTransparency="True" Width="100">
-                        <Border Background="Black" BorderThickness="1" BorderBrush="#CCCCCC" CornerRadius="5">
+       StaysOpen="False" AllowsTransparency="True" Width="250" Height="Auto">
+                        <Border Background="White" BorderThickness="0" CornerRadius="10" Padding="10" 
+            >
                             <ListBox x:Name="SearchResultListBox" 
-                                     Background="White" 
-                                     Visibility="Visible" 
-                                     SelectionChanged="SearchResultListBox_SelectionChanged"
-                                     />
+                 Background="Transparent" 
+                 BorderThickness="0"
+                 ScrollViewer.VerticalScrollBarVisibility="Auto"
+                 SelectionChanged="SearchResultListBox_SelectionChanged">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal" Margin="5">
+                                            
+
+                                            <!-- Name and Details -->
+                                            <TextBlock Text="{Binding FullName}" FontSize="16" Foreground="Black" 
+                                   VerticalAlignment="Center"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
                         </Border>
                     </Popup>
+
                 </Grid>
             </Border>
 
@@ -229,7 +250,23 @@
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal" Margin="5">
                                             <!-- Add an icon or avatar here -->
-                                            <Ellipse Width="40" Height="40" Fill="Black" Margin="5" VerticalAlignment="Center" />
+                                            <Grid Width="40" Height="40" VerticalAlignment="Center" Margin="10,0,0,0">
+                                                <Ellipse Fill="Black" Stroke="Transparent" Width="40" Height="40" />
+                                                <TextBlock FontSize="16" 
+                                   FontWeight="Bold"
+                                   Foreground="White"
+                                   HorizontalAlignment="Center" 
+                                   VerticalAlignment="Center">
+                                    <Run>
+                                        <Run.Text>
+    <MultiBinding Converter="{StaticResource FirstLetterMultiConverter}">
+        <Binding Path="FirstName" />
+        <Binding Path="LastName" />
+    </MultiBinding>
+</Run.Text>
+                                    </Run>
+                                                </TextBlock>
+                                            </Grid>
                                             <TextBlock Text="{Binding Username}" FontWeight="Bold" Foreground="Black" Margin="10,0,0,0" VerticalAlignment="Center" />
                                         </StackPanel>
                                     </DataTemplate>

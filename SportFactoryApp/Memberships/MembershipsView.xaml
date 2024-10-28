@@ -1,0 +1,83 @@
+﻿<UserControl x:Class="SportFactoryApp.Memberships.MembershipsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:SportFactoryApp.Members"
+             xmlns:local1="clr-namespace:SportFactoryApp.Converters"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit">
+    <UserControl.Resources>
+
+        <local1:FirstLetterMultiConverter x:Key="FirstLetterMultiConverter"/>
+        
+
+    </UserControl.Resources>   
+    <StackPanel Margin="20">
+        <!-- Members Section -->
+
+        <Grid Width="auto">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <!-- TextBlock occupies available space -->
+                <ColumnDefinition Width="Auto" />
+                <!-- Button will auto-size to its content -->
+            </Grid.ColumnDefinitions>
+
+            <!-- TextBlock on the left -->
+            <TextBlock Text="Abonnements" FontSize="16" FontWeight="Bold" Margin="0,0,0,0" Grid.Column="0"/>
+
+            <!-- Button on the right -->
+            <Border CornerRadius="15" Background="#5C7CFA" 
+BorderBrush="#4CAF50" Width="150" HorizontalAlignment="Right">
+                <Button HorizontalAlignment="Right" 
+        Grid.Column="1" 
+        Width="150" 
+        Margin="10,0,0,0" 
+        Background="Transparent" 
+        BorderBrush="#4CAF50" 
+        BorderThickness="1" 
+        
+        
+        Click="AddMembership_Click">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+                    BorderBrush="{TemplateBinding BorderBrush}" 
+                    BorderThickness="{TemplateBinding BorderThickness}" 
+                    CornerRadius="15">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                    <Image Source="pack://application:,,,/Images/icons8-add-48.png" Width="24" Height="24" Margin="5"/>
+                                    <TextBlock Text="Nouveau Membre" FontSize="12" Foreground="White" VerticalAlignment="Center" FontFamily="Segoe UI" FontWeight="Bold"  />
+                            </StackPanel>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            </Border>
+        </Grid>
+        
+
+
+        
+
+        <!-- Memberships Section -->
+     
+        <DataGrid x:Name="MembershipsDataGrid" AutoGenerateColumns="False" SelectionChanged="MembershipsDataGrid_SelectionChanged" BorderThickness="0" CanUserAddRows="False" CanUserResizeRows="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Membre" Binding="{Binding Member.FullName}" />
+                <DataGridTextColumn Header="Type d'abonnement" Binding="{Binding Type}" />
+                <DataGridTextColumn Header="Prix" Binding="{Binding Price}" />
+                <DataGridTextColumn Header="Status" Binding="{Binding Status}" />
+                <DataGridTextColumn Header="Date de debut " Binding="{Binding Date}" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+
+
+        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+            <Button Content="Ajouter Abonnement" Click="AddMembership_Click" Margin="5"/>
+            <Button Content="Mise à Jour Abonnement" Click="UpdateMembership_Click" Margin="5"/>
+            <Button Content="Effacer Abonnement" Click="DeleteMembership_Click" Margin="5"/>
+        </StackPanel>
+
+        <!-- Form will be displayed dynamically on button clicks -->
+    </StackPanel>
+</UserControl>

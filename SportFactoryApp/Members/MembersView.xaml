@@ -12,31 +12,103 @@
     </UserControl.Resources>   
     <StackPanel Margin="20">
         <!-- Members Section -->
-
-        <Grid Width="auto">
+        <Border  CornerRadius="10" Padding="10" Margin="10">
+            <Border.Background>
+                <ImageBrush ImageSource="pack://application:,,,/Images/members_cards_bg.png" Stretch="UniformToFill"/>
+            </Border.Background>
+            <StackPanel>
+            <Grid Width="auto">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <!-- TextBlock occupies available space -->
                 <ColumnDefinition Width="Auto" />
                 <!-- Button will auto-size to its content -->
             </Grid.ColumnDefinitions>
+            
 
             <!-- TextBlock on the left -->
-            <TextBlock Text="Members" FontSize="16" FontWeight="Bold" Margin="0,0,0,0" Grid.Column="0"/>
+            <TextBlock Text="Members" FontSize="16" FontWeight="Bold" Margin="0,0,0,0" Grid.Column="0" Foreground="White"/>
 
             <!-- Button on the right -->
-            <Button Content="Nouveau Membre" 
-            Click="AddMember_Click" 
-            HorizontalAlignment="Right" 
-            Grid.Column="1" 
-            Width="120" 
-            Margin="10,0,0,0"/>
+            <Border CornerRadius="15" Background="#5C7CFA" 
+BorderBrush="#4CAF50" Width="150" HorizontalAlignment="Right">
+                <Button HorizontalAlignment="Right" 
+        Grid.Column="1" 
+        Width="150" 
+        Margin="10,0,0,0" 
+        Background="Transparent" 
+        BorderBrush="#4CAF50" 
+        BorderThickness="1" 
+        
+        
+        Click="AddMember_Click">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+                    BorderBrush="{TemplateBinding BorderBrush}" 
+                    BorderThickness="{TemplateBinding BorderThickness}" 
+                    CornerRadius="15">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                    <Image Source="pack://application:,,,/Images/icons8-add-48.png" Width="24" Height="24" Margin="5"/>
+                                    <TextBlock Text="Nouveau Membre" FontSize="12" Foreground="White" VerticalAlignment="Center" FontFamily="Segoe UI" FontWeight="Bold"  />
+                            </StackPanel>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            </Border>
         </Grid>
+
+        
+            <!-- Overview Cards -->
+            <Grid HorizontalAlignment="Stretch" Margin="0, 0, 0, 20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+                <!-- Card 1: Total Members -->
+                    <Border Height="100" Grid.Column="0" Background="White" CornerRadius="10" Margin="5" Padding="20" BorderBrush="Gray" BorderThickness="1" Opacity="0.8">
+                    <StackPanel>
+                        <TextBlock Text="Total Members" FontSize="16" FontWeight="Bold" Foreground="Black" HorizontalAlignment="Center"/>
+                        <TextBlock x:Name="TotalMembersText" FontSize="24" FontWeight="Bold" Foreground="Black" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Card 2: Active Members with 12-Session Pack -->
+                    <Border Grid.Column="1" Background="White" CornerRadius="10" Margin="5" Padding="20" BorderBrush="Gray" BorderThickness="1" Opacity="0.8">
+                    <StackPanel>
+                        <TextBlock Text="Active Members" FontSize="16" FontWeight="Bold" Foreground="Black" HorizontalAlignment="Center"/>
+                        <TextBlock x:Name="ActiveMembersText" FontSize="24" FontWeight="Bold" Foreground="Black" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Card 3: Loyalty Percentage -->
+                    <Border Grid.Column="2" Background="White" CornerRadius="10" Margin="5" Padding="20" BorderBrush="Gray" BorderThickness="1" Opacity="0.8">
+                    <StackPanel>
+                        <TextBlock Text="Loyalty Percentage" FontSize="16" FontWeight="Bold" Foreground="Black" HorizontalAlignment="Center"/>
+                        <TextBlock x:Name="LoyaltyPercentageText" FontSize="24" FontWeight="Bold" Foreground="Black" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+            <Border Grid.Column="3" Background="White" CornerRadius="10" Margin="5" Padding="20" Opacity="0.8">
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <TextBlock Text="Attendance Rate" FontSize="14" FontWeight="Bold" Foreground="Black"/>
+                    <TextBlock x:Name="AttendanceRateText" FontSize="30" FontWeight="Bold" Foreground="Black"/>
+                    
+                </StackPanel>
+            </Border>
+        </Grid>
+        </StackPanel>
+        </Border>
         <DataGrid x:Name="MembersDataGrid" 
            
           AutoGenerateColumns="False" 
           SelectionChanged="MembersDataGrid_SelectionChanged"
           BorderThickness="0"
+          MaxHeight="500"
+          ScrollViewer.CanContentScroll="True"
           CanUserAddRows="False" 
           CanUserResizeRows="False"
           FontWeight="Bold" 
@@ -136,7 +208,7 @@
                 </DataGridTemplateColumn>
                 <DataGridTextColumn Header="Telephone" Binding="{Binding PhoneNumber}" />
                 <DataGridTextColumn Header="Gendre" Binding="{Binding Gender}" />
-                <DataGridTextColumn Header="Date de naissance " Binding="{Binding BirthDate}" />
+                <DataGridTextColumn Header="Date de naissance " Binding="{Binding BirthDate , StringFormat={}{0: dd MMMM yyyy}}" />
                 <DataGridTextColumn Header="Date d'adherence " Binding="{Binding StartDate}" />
                 <DataGridTemplateColumn Header="Actions" Width="Auto">
                     <DataGridTemplateColumn.CellTemplate >
@@ -187,26 +259,7 @@ Cursor="Hand">
 
         
 
-        <!-- Memberships Section -->
-        <TextBlock Text="Latest Memberships" FontSize="16" FontWeight="Bold" Margin="0,20,0,10"/>
-
-        <DataGrid x:Name="MembershipsDataGrid" AutoGenerateColumns="False" SelectionChanged="MembershipsDataGrid_SelectionChanged" BorderThickness="0" CanUserAddRows="False" CanUserResizeRows="False">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Membre" Binding="{Binding Member.FullName}" />
-                <DataGridTextColumn Header="Type d'abonnement" Binding="{Binding Type}" />
-                <DataGridTextColumn Header="Prix" Binding="{Binding Price}" />
-                <DataGridTextColumn Header="Status" Binding="{Binding Status}" />
-                <DataGridTextColumn Header="Date de debut " Binding="{Binding Date}" />
-            </DataGrid.Columns>
-        </DataGrid>
-
-
-
-        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-            <Button Content="Ajouter Abonnement" Click="AddMembership_Click" Margin="5"/>
-            <Button Content="Mise à Jour Abonnement" Click="UpdateMembership_Click" Margin="5"/>
-            <Button Content="Effacer Abonnement" Click="DeleteMembership_Click" Margin="5"/>
-        </StackPanel>
+      
 
         <!-- Form will be displayed dynamically on button clicks -->
     </StackPanel>

@@ -27,5 +27,12 @@ namespace SportFactoryApp.Members
             DialogResult = true; // Close the window and return true
             Close();
         }
+
+        // Event handler for the Cancel button
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.DialogResult = false; // Set dialog result to false
+            this.Close(); // Close the window
+        }
     }
 }

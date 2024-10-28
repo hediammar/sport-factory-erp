@@ -1,41 +1,120 @@
 ﻿<Window x:Class="SportFactoryApp.Members.AddMemberWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-        Title="Add Member" Height="400" Width="400">
-    <StackPanel Margin="20" VerticalAlignment="Center">
-        <TextBlock Text="Prenom" Margin="10" HorizontalAlignment="Center" FontFamily="72" FontWeight="Bold"/>
-        <xctk:WatermarkTextBox Name="FirstNameTextBox" Width="200"  Watermark="Entrer le prenom du membre" />
-        <TextBlock Text="Nom" Margin="10" HorizontalAlignment="Center" FontFamily="72" FontWeight="Bold"></TextBlock>
-        <xctk:WatermarkTextBox Name="LastNameTextBox" Width="200" Watermark="Entrer le nom du membre" />
-        <TextBlock Text="Numero de telephone" Margin="10" HorizontalAlignment="Center" FontFamily="72" FontWeight="Bold"></TextBlock>
-        <xctk:WatermarkTextBox Name="PhoneNumberTextBox" Width="200" Watermark="Entrer numero telephone" />
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Title="Add Member" WindowState="Maximized"
+        
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent" HorizontalAlignment="Center" VerticalAlignment="Center">
 
-        <!-- Gender ComboBox with placeholder -->
-        <TextBlock Text="Gendre du membre" Margin="10" HorizontalAlignment="Center" FontFamily="72" FontWeight="Bold"></TextBlock>
-        <ComboBox Name="GenderComboBox" Width="200" Margin="0,0,0,0" HorizontalAlignment="Center">
-            <ComboBox.Resources>
-                <Style TargetType="ComboBox">
-                    <Style.Triggers>
-                        <Trigger Property="SelectedItem" Value="{x:Null}">
-                            <Setter Property="Foreground" Value="Gray"/>
-                        </Trigger>
-                        <Trigger Property="SelectedItem" Value="{x:Null}">
-                            <Setter Property="Text" Value="Select Gender"/>
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </ComboBox.Resources>
-            <ComboBoxItem Content="Homme" />
-            <ComboBoxItem Content="Femme" />
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!-- MaterialDesign in XAML Toolkit -->
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+
+                <!-- MaterialDesign DatePicker -->
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.DatePicker.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <!-- Dimmed Background Overlay -->
+        <Rectangle Fill="Black" Opacity="0.4"/>
+        <Border CornerRadius="15" Background="White" BorderBrush="Black" BorderThickness="0" Padding="10" Height="440" Width="480">
+        <Border.Effect>
+            <DropShadowEffect Color="#aefe14" BlurRadius="150" ShadowDepth="5" Opacity="0.5"/>
+        </Border.Effect>
+        <StackPanel VerticalAlignment="Center">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="pack://application:,,,/Images/icons8-utilisateur-30.png" Height="30" Margin="0,0,10,0" VerticalAlignment="Top"/>
+                <StackPanel Orientation="Vertical">
+                    <TextBlock FontWeight="Bold" FontSize="20">Nouveau Membre</TextBlock>
+                    <TextBlock FontWeight="Normal" Foreground="Gray" FontSize="10">Bienvenue à notre nouveau membre de la famille Sport Factory</TextBlock>
+                </StackPanel>
+            </StackPanel>
+
+            <TextBlock Text="Nom et Prenom" Margin="10" HorizontalAlignment="Left" FontFamily="72" FontWeight="Bold"></TextBlock>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <!-- First Name Field -->
+                <Border CornerRadius="5" Width="205" Background="White" BorderBrush="Black" BorderThickness="1" Margin="0,0,5,0">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="pack://application:,,,/Images/icons8-utilisateur-30.png" Height="15" Margin="10,0,0,0"/>
+                        <TextBox Name="FirstNameTextBox" Height="40" Width="190" BorderThickness="0"
+                                 Background="Transparent" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
+                                 materialDesign:HintAssist.Hint="Prenom"
+                                 materialDesign:HintAssist.IsFloating="True"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Last Name Field -->
+                <Border CornerRadius="5" Width="205" Background="White" BorderBrush="Black" BorderThickness="1" Margin="5,0,0,0">
+                    <TextBox Name="LastNameTextBox" Width="220" BorderThickness="0" Background="Transparent"
+                             HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Padding="10"
+                             materialDesign:HintAssist.Hint="Nom"
+                             materialDesign:HintAssist.IsFloating="True"/>
+                </Border>
+            </StackPanel>
+
+            <TextBlock Text="Numero Telephone" Margin="10" HorizontalAlignment="Left" FontFamily="72" FontWeight="Bold"></TextBlock>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <!-- Phone Number Field -->
+                <Border CornerRadius="5" Width="420" Background="White" BorderBrush="Black" BorderThickness="1">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="pack://application:,,,/Images/icons8-phone-30.png" Height="15" Margin="10,0,0,0"/>
+                        <TextBox Name="PhoneNumberTextBox" Height="40" Width="200" BorderThickness="0"
+                                 Background="Transparent" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
+                                 materialDesign:HintAssist.Hint="Numero telephone"
+                                 materialDesign:HintAssist.IsFloating="True"/>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+
+            <!-- Gender ComboBox remains the same -->
+            <!-- Date of Birth DatePicker remains the same -->
+            <!-- Gender ComboBox with placeholder -->
+            <TextBlock Text="Gendre du membre" Margin="10" HorizontalAlignment="Left" FontFamily="72" FontWeight="Bold"></TextBlock>
+            <Border CornerRadius="5" Width="420" Background="White" BorderBrush="Black" BorderThickness="1">
+
+                <ComboBox 
+x:Name="GenderComboBox" 
+Style="{StaticResource MaterialDesignComboBox}" 
+materialDesign:HintAssist.Hint="Gendre"
             
-        </ComboBox>
+materialDesign:HintAssist.IsFloating="True"
+Width="400"
+            Height="40"
+VerticalContentAlignment="Top"
+        >
 
-        <!-- Date of Birth DatePicker -->
-        <TextBlock Text="Date de naissance du membre" Margin="10" HorizontalAlignment="Center" FontFamily="72" FontWeight="Bold"></TextBlock>
-        <DatePicker Name="BirthDatePicker" Width="200" Margin="0,0,0,0" HorizontalAlignment="Center" />
+                    <ComboBoxItem>Homme</ComboBoxItem>
+                    <ComboBoxItem>Femme</ComboBoxItem>
 
-        <Button Name="AddMemberButton" Content="Add Member" Click="AddButton_Click"
-                Width="150" Margin="0,20,0,0" HorizontalAlignment="Center"/>
-    </StackPanel>
+                </ComboBox>
+            </Border>
+
+            <TextBlock Text="Date de naissance" Margin="10" HorizontalAlignment="Left" FontFamily="72" FontWeight="Bold"></TextBlock>
+            <!-- Date of Birth DatePicker -->
+            <Border CornerRadius="5" Width="420" Background="White" BorderBrush="Black" BorderThickness="1">
+                <DatePicker 
+x:Name="BirthDatePicker" 
+Style="{StaticResource MaterialDesignDatePicker}" 
+        Foreground="Black"
+materialDesign:HintAssist.Hint="Date de Naissance"
+materialDesign:HintAssist.IsFloating="True"
+Width="400"
+Margin="0"
+        ></DatePicker>
+            </Border>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Name="AddMemberButton" Content="Ajouter Membre" Click="AddButton_Click"
+                        Width="260" Margin="0,20,20,0" HorizontalAlignment="Center" Background="#aefe14" FontWeight="Bold" Height="40"/>
+                <Button Content="Cancel" Click="CancelButton_Click" Height="40" Width="140" Margin="0,20,0,0" HorizontalAlignment="Center" Background="WhiteSmoke" FontWeight="Bold" />
+            </StackPanel>
+        </StackPanel>
+    </Border>
+    </Grid>
 </Window>

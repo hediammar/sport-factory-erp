@@ -28,7 +28,7 @@ namespace SportFactoryApp.Members
         private void LoadMemberships()
         {
             var memberships = _context.Membershipss.Include(m => m.Member).ToList();
-            MembershipsDataGrid.ItemsSource = memberships; // Update this line
+           
         }
 
         // Load Members from the database and display them in the ListBox
@@ -36,6 +36,26 @@ namespace SportFactoryApp.Members
         {
             var members = _context.Members.ToList();
             MembersDataGrid.ItemsSource = members;
+
+            // Calculate total members
+            int totalMembers = members.Count;
+
+            // Calculate active members with 12-Session Pack
+            int activeMembersWith12Pack = _context.Membershipss
+                .Count(m => m.Status == "Active" && m.Type == "Pack 12 Seances");
+
+            // Calculate loyalty percentage
+            double loyaltyPercentage = totalMembers > 0
+                ? (double)activeMembersWith12Pack / totalMembers * 100
+                : 0;
+
+            // Update TextBlocks with calculated values
+            TotalMembersText.Text = totalMembers.ToString();
+            ActiveMembersText.Text = activeMembersWith12Pack.ToString();
+            LoyaltyPercentageText.Text = $"{loyaltyPercentage:F2}%";
+            CalculateAttendanceRate();
+
+           
         }
 
         private void MembersDataGrid_PreviewMouseDown(object sender, MouseButtonEventArgs e)
@@ -137,37 +157,7 @@ namespace SportFactoryApp.Members
         }
 
         // Update Membership Event Handler
-        private void UpdateMembership_Click(object sender, RoutedEventArgs e)
-        {
-            if (MembershipsDataGrid.SelectedItem is Membership selectedMembership)
-            {
-                var updateMembershipWindow = new UpdateMembershipWindow(selectedMembership);
-                if (updateMembershipWindow.ShowDialog() == true) // If user confirms update
-                {
-                    //_context.SaveChanges(); // Save changes made in the update window
-                    LoadMemberships(); // Refresh the list
-                }
-            }
-            else
-            {
-                MessageBox.Show("Please select a membership to update.");
-            }
-        }
-
-        // Delete Membership Event Handler
-        private void DeleteMembership_Click(object sender, RoutedEventArgs e)
-        {
-            if (MembershipsDataGrid.SelectedItem is Membership selectedMembership)
-            {
-                _context.Membershipss.Remove(selectedMembership);
-                _context.SaveChanges();
-                LoadMemberships(); // Refresh the list
-            }
-            else
-            {
-                MessageBox.Show("Please select a membership to delete.");
-            }
-        }
+       
         private void MembersDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             // You can implement any logic you want to execute when a member is selected
@@ -180,13 +170,7 @@ namespace SportFactoryApp.Members
             }
         }
         
-        private void MembershipsDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e) // Update this line
-        {
-            if (MembershipsDataGrid.SelectedItem is Membership selectedMembership) // Update this line
-            {
-                // Implement any logic you want when a membership is selected
-            }
-        }
+       
         private void ShowMemberProfile_Click(object sender, RoutedEventArgs e)
         {
             // Ensure the _mainWindow instance is available
@@ -245,6 +229,32 @@ namespace SportFactoryApp.Members
                 return null;
             }
         }
+
+        private void CalculateAttendanceRate()
+        {
+            // Total possible sessions for active members with "Pack 12 Seances"
+            int activeMembersWith12Pack = _context.Membershipss
+                .Count(m => m.Status == "Active" && m.Type == "Pack 12 Seances");
+
+            // Calculate the maximum possible sessions (12 per active member with the pack)
+            int totalPossibleSessions = activeMembersWith12Pack * 12;
+
+            // Count the actual attended sessions for members with "Pack 12 Seances" and "Active" status
+            int attendedSessions = _context.Sessions
+                .Count(s => s.Membership.Status == "Active" && s.Membership.Type == "Pack 12 Seances");
+                //.Any(m => m.Type == "Pack 12 Seances" && m.Status == "Active"));
+
+            // Calculate attendance rate as a percentage
+            double attendanceRate = totalPossibleSessions > 0
+                ? (double)attendedSessions / totalPossibleSessions * 100
+                : 0;
+
+            // Display the attendance rate in a TextBlock
+            AttendanceRateText.Text = $"{attendanceRate:F2}%";
+            
+        }
+
+
 
 
     }

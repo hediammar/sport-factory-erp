@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\21650\Desktop\SportFactoryApp\SportFactoryApp\obj\Debug\net6.0-windows\
+C:\Users\21650\Downloads\sport-factory-erp\SportFactoryApp\obj\Debug\net6.0-windows\
 SportFactoryApp
 none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
-C:\Users\21650\Desktop\SportFactoryApp\SportFactoryApp\App.xaml
-10921448651
+C:\Users\21650\Downloads\sport-factory-erp\SportFactoryApp\App.xaml
+11-1152264989
 
-331129268594
-248-1651016107
-LoadingWindow.xaml;LoginWindow.xaml;MainWindow.xaml;Memberships\AddMembershipWindow.xaml;Memberships\UpdateMembershipWindow.xaml;Members\AddMemberWindow.xaml;Members\MembersView.xaml;Members\UpdateMemberWindow.xaml;Overview\OverViewView.xaml;Profile\MemberProfileView.xaml;
+34-288888510
+2521787090159
+LoadingWindow.xaml;LoginWindow.xaml;MainWindow.xaml;Memberships\AddMembershipWindow.xaml;Memberships\MembershipsView.xaml;Memberships\UpdateMembershipWindow.xaml;Members\AddMemberWindow.xaml;Members\MembersView.xaml;Members\UpdateMemberWindow.xaml;Overview\OverViewView.xaml;Profile\MemberProfileView.xaml;
 
 True
 

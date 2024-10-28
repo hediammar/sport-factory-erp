@@ -3,6 +3,7 @@ using System;
 using System.Windows;
 using System.Windows.Input;
 using SportFactoryApp.Members;
+using SportFactoryApp.Memberships;
 using SportFactoryApp.Profile;
 using System.Collections.Generic;
 using System.Windows.Controls;
@@ -121,8 +122,8 @@ namespace SportFactoryApp
             // Set the clicked button as the new last checked button
             _lastCheckedButton = clickedButton;
 
-            var MembersView = new MembersView(this); // Assuming ChargesView is a UserControl
-            MainContentControl.Content = MembersView;
+            var MembershipView = new MembershipsView(this); // Assuming ChargesView is a UserControl
+            MainContentControl.Content = MembershipView;
         }
 
         private void ShowMembersView()
@@ -180,7 +181,7 @@ namespace SportFactoryApp
             {
                 // Fetch member details based on the selected member ID
                 var member = GetMemberById(selectedMember.Id); // Fetch using the member ID
-
+                SearchTextBox.Clear();
                 if (member != null)
                 {
                     // Create the MemberProfileView UserControl

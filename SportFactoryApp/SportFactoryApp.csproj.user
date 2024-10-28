@@ -39,6 +39,9 @@
     <Page Update="Members\AddMemberWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Memberships\MembershipsView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Members\UpdateMemberWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
